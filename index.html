@@ -135,24 +135,31 @@
       <div class="flex flex-wrap items-center gap-2">
         <button
           type="button"
+          data-sample="usb_video_editor"
+          class="sample-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-indigo-700 border border-indigo-200 hover:bg-indigo-600 hover:text-white hover:border-indigo-600 transition shadow-2xs cursor-pointer"
+        >
+          例1：USB完結・動画カット＆音声追加（python_embed＋FFmpeg）
+        </button>
+        <button
+          type="button"
           data-sample="python_resize"
           class="sample-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-indigo-700 border border-indigo-200 hover:bg-indigo-600 hover:text-white hover:border-indigo-600 transition shadow-2xs cursor-pointer"
         >
-          例1：画像リサイズ・一括リネーム（Python / 新規）
+          例2：画像リサイズ・一括リネーム（Python）
         </button>
         <button
           type="button"
           data-sample="pomodoro_auto"
           class="sample-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-indigo-700 border border-indigo-200 hover:bg-indigo-600 hover:text-white hover:border-indigo-600 transition shadow-2xs cursor-pointer"
         >
-          例2：ポモドーロタイマー（言語おまかせ / 新規）
+          例3：学習用タイマーアプリ（言語おまかせ）
         </button>
         <button
           type="button"
           data-sample="bugfix_button"
           class="sample-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-indigo-700 border border-indigo-200 hover:bg-indigo-600 hover:text-white hover:border-indigo-600 transition shadow-2xs cursor-pointer"
         >
-          例3：ボタンが動かないエラー修正（修正モード）
+          例4：ボタンが動かないエラー修正（修正モード）
         </button>
       </div>
     </div>
@@ -230,19 +237,21 @@
             <!-- プログラミング言語 -->
             <div>
               <label for="selectLanguage" class="block text-sm font-semibold text-slate-800 mb-1.5">
-                プログラミング言語
+                プログラミング言語・構成
               </label>
               <select
                 id="selectLanguage"
                 class="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-800 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition"
               >
                 <option value="auto">★ わからない（AIにおまかせ）</option>
+                <option value="python_embed_ui">Python (python_embed) + ブラウザUI (HTML/Canvas) ★ポータブル</option>
+                <option value="python_embed_ffmpeg_ui">Python (python_embed) + FFmpeg + ブラウザUI (HTML/Canvas) ★USB動画/音声処理</option>
                 <option value="Python">Python</option>
-                <option value="HTML / CSS / JavaScript（ブラウザ動作）">HTML / CSS / JavaScript（ブラウザ動作）</option>
-                <option value="JavaScript / Node.js">JavaScript / Node.js</option>
-                <option value="Arduino (C/C++)">Arduino (C/C++)</option>
-                <option value="Processing">Processing</option>
-                <option value="C# (Unity)">C# (Unity)</option>
+                <option value="HTML / CSS / JavaScript（単一ファイル・Webアプリ）">HTML / CSS / JavaScript（単一ファイル・Webアプリ）</option>
+                <option value="Processing / p5.js">Processing / p5.js</option>
+                <option value="Arduino (C++)">Arduino (C++)</option>
+                <option value="JavaScript / TypeScript (Node.js)">JavaScript / TypeScript (Node.js)</option>
+                <option value="C# / Unity">C# / Unity</option>
                 <option value="other">その他（自由入力）</option>
               </select>
               <p id="langHint" class="text-xs text-indigo-600 mt-1.5">
@@ -252,8 +261,9 @@
 
             <!-- OS（動かしたいパソコン） -->
             <div>
-              <label for="selectOs" class="block text-sm font-semibold text-slate-800 mb-1.5">
-                OS（動かしたいパソコン）
+              <label for="selectOs" class="flex items-center gap-2 text-sm font-semibold text-slate-800 mb-1.5">
+                <span>動作させるOS</span>
+                <span id="badgeWinRec" class="hidden px-2 py-0.5 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-700">Windows推奨</span>
               </label>
               <select
                 id="selectOs"
@@ -269,17 +279,30 @@
             <!-- 実行形態（見た目） -->
             <div>
               <label for="selectUiType" class="block text-sm font-semibold text-slate-800 mb-1.5">
-                実行形態（見た目）
+                実行形態・見た目
               </label>
               <select
                 id="selectUiType"
                 class="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-800 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition"
               >
                 <option value="AIにおまかせ">AIにおまかせ</option>
-                <option value="ボタンのある画面（GUI・Webアプリ）">ボタンのある画面（GUI・Webアプリ）</option>
-                <option value="黒い画面（コマンドライン・CUI）">黒い画面（コマンドライン・CUI）</option>
+                <option value="ボタンのある画面（GUIアプリ）">ボタンのある画面（GUIアプリ）</option>
+                <option value="ブラウザUI（ローカルサーバー＋HTML/Canvas）">ブラウザUI（ローカルサーバー＋HTML/Canvas）</option>
+                <option value="Webページ（HTML単体）">Webページ（HTML単体）</option>
+                <option value="黒い画面（CUI・コマンドライン）">黒い画面（CUI・コマンドライン）</option>
               </select>
             </div>
+          </div>
+
+          <!-- ポータブル構成（python_embed）選択時の案内バナー -->
+          <div id="portableInfoBanner" class="hidden rounded-xl border border-emerald-200 bg-emerald-50/80 p-3.5 text-xs text-emerald-900 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-emerald-800">
+              <span class="px-2 py-0.5 rounded-full bg-emerald-600 text-white text-[11px]">USBポータブル構成 ON</span>
+              <span id="portableInfoTitle">PC本体を汚さずUSBメモリ内で完結動作する構成が選ばれました</span>
+            </div>
+            <p id="portableInfoDesc" class="leading-relaxed text-emerald-800">
+              OS（Windows）、ブラウザUI、setup.bat／start.bat生成、相対パス設計、フォルダ構成ツリー、導入手順を自動で最適化しました。プロンプトには <code class="px-1 py-0.5 rounded bg-white/80 font-mono text-[11px]">.\python_embed\python.exe</code> や <code class="px-1 py-0.5 rounded bg-white/80 font-mono text-[11px]">._pth</code> 設定などの技術要件が自動で組み込まれます。
+            </p>
           </div>
 
           <!-- 「その他」言語の自由入力 -->
@@ -305,14 +328,14 @@
               作りたいものの内容（新規作成）
             </h2>
             <p class="text-xs text-slate-500 mt-1">
-              赤い「必須」の3つを埋めるだけで、AIが迷わずコードを書けるようになります。
+              赤い「必須」の項目を埋めるだけで、AIが迷わずコードを書けるようになります。
             </p>
           </div>
 
-          <!-- 1. 何を作りたいか（目的・概要） -->
+          <!-- ① 何を作るか（アプリ名・一言でいう目的） -->
           <div>
             <label for="newPurpose" class="flex items-center gap-2 text-sm font-semibold text-slate-800 mb-1">
-              <span>何を作りたいか（目的・概要）</span>
+              <span>① 何を作るか（アプリ名・一言でいう目的）</span>
               <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-rose-100 text-rose-700">必須</span>
             </label>
             <p class="text-xs text-slate-500 mb-1.5">「どんなツール・アプリを作りたいか」を普段の言葉で書いてください。</p>
@@ -324,10 +347,25 @@
             ></textarea>
           </div>
 
-          <!-- 2. 入力と出力 -->
+          <!-- ② 誰が・どんな場面で使うか（利用シーン・想定ユーザー） -->
+          <div>
+            <label for="newScene" class="flex items-center gap-2 text-sm font-semibold text-slate-800 mb-1">
+              <span>② 誰が・どんな場面で使うか（利用シーン・想定ユーザー）</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-rose-100 text-rose-700">必須</span>
+            </label>
+            <p class="text-xs text-slate-500 mb-1.5">使う人のITスキルや使う場所（自宅PC、学校の共用PC、USBメモリ内など）を書くと親切なUIになります。</p>
+            <textarea
+              id="newScene"
+              rows="2"
+              class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm text-slate-800 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition"
+              placeholder="例：プログラミング初心者の自分が、学校や職場の共用Windows PCにUSBメモリを挿して作業するときに使う"
+            ></textarea>
+          </div>
+
+          <!-- ③ 入力するものと、出力・結果として得たいもの -->
           <div>
             <label for="newIo" class="flex items-center gap-2 text-sm font-semibold text-slate-800 mb-1">
-              <span>入力と出力（何を入れて、何が出てくれば成功か）</span>
+              <span>③ 入力するものと、出力・結果として得たいもの</span>
               <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-rose-100 text-rose-700">必須</span>
             </label>
             <p class="text-xs text-slate-500 mb-1.5">「〜を入れると → 〜が出力される」の形で書くと、イメージのズレを防げます。</p>
@@ -811,6 +849,7 @@
 
           // 新規作成モード
           newPurpose: '',
+          newScene: '',
           newIo: '',
           newBullets: ['', '', ''],
           newNotes: '',
@@ -837,16 +876,45 @@
       }
 
       const SAMPLES = {
+        usb_video_editor: {
+          label: '例1：USB完結・動画カット＆音声追加（python_embed＋FFmpeg）',
+          data: {
+            mode: 'new',
+            llm: 'general',
+            language: 'python_embed_ffmpeg_ui',
+            otherLang: '',
+            os: 'Windows',
+            uiType: 'ブラウザUI（ローカルサーバー＋HTML/Canvas）',
+            newPurpose: 'USBメモリに入れたままWindows PCで動く、シンプルな動画カット＆BGM追加ツールを作りたい。',
+            newScene: '動画編集ソフトを入れられない学校や職場のWindows PCで、USBメモリを挿してブラウザ画面から手軽に短い動画を編集したい。',
+            newIo: 'MP4動画とBGM用のMP3音声を読み込み、ブラウザ上で開始〜終了時間とBGM音量を指定すると、カット＋音声合成されたMP4動画がプロジェクト内のoutputフォルダに書き出される。',
+            newBullets: [
+              'ブラウザ上で動画をプレビュー再生し、スライダーまたは秒数入力で「開始位置」と「終了位置」を指定できる',
+              'BGM音声ファイル（MP3/WAV）を追加し、元動画の音量とBGMの音量をそれぞれ調整できる',
+              '「書き出し実行」ボタンを押すと進捗状況が表示され、完了後に保存先ファイル名とダウンロードリンクを表示する',
+              '作業中の一時ファイルや出力動画はすべてUSB内のプロジェクトフォルダに保存し、PC本体にゴミを残さない',
+            ],
+            newNotes: '専門用語を避けた日本語UIにして、PCにPythonやFFmpegが入っていなくてもUSB内だけで完結するようにしたいです。',
+            optNoOmit: true,
+            optClarifyFirst: false,
+            optScript: true,
+            optTree: true,
+            optPortable: true,
+            optSetupGuide: true,
+            recommendMode: 'suggest',
+          },
+        },
         python_resize: {
-          label: '例1：画像リサイズ・一括リネーム（Python / 新規）',
+          label: '例2：画像リサイズ・一括リネーム（Python）',
           data: {
             mode: 'new',
             llm: 'general',
             language: 'Python',
             otherLang: '',
             os: 'Windows',
-            uiType: 'ボタンのある画面（GUI・Webアプリ）',
+            uiType: 'ボタンのある画面（GUIアプリ）',
             newPurpose: 'フォルダ内にある複数の写真を、まとめて縮小して分かりやすい連番ファイル名に変換するツールを作りたい。',
+            newScene: 'ブログや資料作成の前に、スマホで撮った大量の写真を自分のWindows PCで一括整理したい。',
             newIo: '画像が入ったフォルダを選ぶと、幅800px（縦横比は維持）に縮小し、「photo_001.jpg」のような連番名にして別フォルダ（output）に保存される。',
             newBullets: [
               '画面から元の画像フォルダをボタンで選択できるようにする',
@@ -865,15 +933,16 @@
           },
         },
         pomodoro_auto: {
-          label: '例2：ポモドーロタイマー（言語おまかせ / 新規）',
+          label: '例3：学習用タイマーアプリ（言語おまかせ）',
           data: {
             mode: 'new',
             llm: 'general',
             language: 'auto',
             otherLang: '',
             os: 'どちらでも（Webブラウザ）',
-            uiType: 'ボタンのある画面（GUI・Webアプリ）',
+            uiType: 'Webページ（HTML単体）',
             newPurpose: '勉強や作業に集中するためのシンプルなポモドーロタイマー（25分作業＋5分休憩）を作りたい。',
+            newScene: '自宅のパソコンやタブレットで資格勉強をするときに、画面の端に置いて使いたい。',
             newIo: 'スタートボタンを押すと25分のカウントダウンが始まり、0になったら音と画面表示で知らせて5分休憩に切り替わる。',
             newBullets: [
               '「スタート」「一時停止」「リセット」の3つのボタンを用意する',
@@ -892,44 +961,14 @@
           },
         },
         bugfix_button: {
-          label: '例3：ボタンが動かないエラー修正（修正モード）',
+          label: '例4：ボタンが動かないエラー修正（修正モード）',
           data: {
             mode: 'modify',
             llm: 'general',
-            language: 'HTML / CSS / JavaScript（ブラウザ動作）',
+            language: 'HTML / CSS / JavaScript（単一ファイル・Webアプリ）',
             otherLang: '',
             os: 'どちらでも（Webブラウザ）',
-            uiType: 'ボタンのある画面（GUI・Webアプリ）',
-            chatState: 'new_chat',
-            attachDirect: false,
-            uploadedFiles: [],
-            pastedCode: `<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>カウンター</title>
-  <script>
-    let count = 0;
-    document.getElementById("countBtn").addEventListener("click", function() {
-      count++;
-      document.getElementById("display").textContent = count;
-    });
-  <\/script>
-</head>
-<body>
-  <p id="display">0</p>
-  <button id="countBtn">増やす</button>
-</body>
-</html>`,
-            modCurrentState: 'ブラウザで開いて「増やす」ボタンを押しても、数字が0のまま変わりません。',
-            modExpectedState: 'ボタンを押すたびに数字が 1, 2, 3... と増えて表示されてほしいです。',
-            modErrorMessage: "Uncaught TypeError: Cannot read properties of null (reading 'addEventListener') at index.html:8:41",
-            modBullets: [
-              'エラーの原因を初心者にも分かるように優しく教えてほしい',
-              'ボタンを押すと数字が増えるようにコードを修正してほしい',
-              'ついでに数字を0に戻す「リセット」ボタンも追加してほしい',
-            ],
-            optNoOmit: true,
+            uiType: 'Webページ（HTML単体）',
             optClarifyFirst: false,
             optScript: false,
             optTree: false,
@@ -956,11 +995,16 @@
         otherLangContainer: document.getElementById('otherLangContainer'),
         inputOtherLang: document.getElementById('inputOtherLang'),
         selectOs: document.getElementById('selectOs'),
+        badgeWinRec: document.getElementById('badgeWinRec'),
         selectUiType: document.getElementById('selectUiType'),
+        portableInfoBanner: document.getElementById('portableInfoBanner'),
+        portableInfoTitle: document.getElementById('portableInfoTitle'),
+        portableInfoDesc: document.getElementById('portableInfoDesc'),
 
         // 新規作成モード
         sectionNewMode: document.getElementById('sectionNewMode'),
         newPurpose: document.getElementById('newPurpose'),
+        newScene: document.getElementById('newScene'),
         newIo: document.getElementById('newIo'),
         newBulletList: document.getElementById('newBulletList'),
         btnAddNewBullet: document.getElementById('btnAddNewBullet'),
@@ -1073,19 +1117,19 @@
           h: 'cpp',
           bat: 'bat',
           sh: 'bash',
-          command: 'bash',
-          xml: 'xml',
-          yaml: 'yaml',
-          yml: 'yaml',
-          sql: 'sql',
-          md: 'markdown',
-        };
-        return map[ext] || '';
+      function isPortableEmbedLang(langValue) {
+        return langValue === 'python_embed_ui' || langValue === 'python_embed_ffmpeg_ui';
       }
 
       function getEffectiveLanguage() {
         if (state.language === 'auto') {
           return 'わからない（AIにおまかせ）';
+        }
+        if (state.language === 'python_embed_ui') {
+          return 'Python (python_embed) + ブラウザUI (HTML/Canvas) ※USB完結ポータブル構成';
+        }
+        if (state.language === 'python_embed_ffmpeg_ui') {
+          return 'Python (python_embed) + FFmpeg + ブラウザUI (HTML/Canvas) ※USB完結・動画/音声処理構成';
         }
         if (state.language === 'other') {
           return state.otherLang.trim() || '（未入力の言語）';
@@ -1174,13 +1218,29 @@
         const isOther = state.language === 'other';
         const isAuto = state.language === 'auto';
         const isPython = state.language === 'Python';
+        const isEmbed = isPortableEmbedLang(state.language);
+        const isEmbedFfmpeg = state.language === 'python_embed_ffmpeg_ui';
 
         el.otherLangContainer.classList.toggle('hidden', !isOther);
-        el.badgePythonRec.classList.toggle('hidden', !isPython);
+        el.badgePythonRec.classList.toggle('hidden', !(isPython || isEmbed));
+        el.badgeWinRec.classList.toggle('hidden', !isEmbed);
+        el.portableInfoBanner.classList.toggle('hidden', !isEmbed);
+
+        if (isEmbed) {
+          el.portableInfoTitle.textContent = isEmbedFfmpeg
+            ? 'USB完結の動画・音声編集／メディア処理構成（python_embed + FFmpeg + ブラウザUI）'
+            : 'PCインストール不要・USB完結Webアプリ構成（python_embed + ブラウザUI）';
+          el.portableInfoDesc.innerHTML = isEmbedFfmpeg
+            ? 'OS（Windows）、ブラウザUI、setup.bat／start.bat、相対パス、ツリー構成、導入手順を自動最適化しました。<code class="px-1 py-0.5 rounded bg-white/80 font-mono text-[11px]">.\\python_embed\\python.exe</code> と <code class="px-1 py-0.5 rounded bg-white/80 font-mono text-[11px]">.\\ffmpeg\\bin\\ffmpeg.exe</code> を相対パスで使う技術要件がプロンプトに自動挿入されます。'
+            : 'OS（Windows）、ブラウザUI、setup.bat／start.bat、相対パス、ツリー構成、導入手順を自動最適化しました。<code class="px-1 py-0.5 rounded bg-white/80 font-mono text-[11px]">.\\python_embed\\python.exe</code> や <code class="px-1 py-0.5 rounded bg-white/80 font-mono text-[11px]">._pth</code> 設定などの技術要件がプロンプトに自動挿入されます。';
+        }
 
         if (isAuto) {
           el.langHint.textContent = '迷ったら「おまかせ」でOK！初心者が動かしやすい言語をAIが選んでくれます。';
           el.langHint.className = 'text-xs text-indigo-600 mt-1.5';
+        } else if (isEmbed) {
+          el.langHint.textContent = 'PC本体を汚さずUSBメモリ内で完結動作するWindows向けポータブル構成です。';
+          el.langHint.className = 'text-xs text-emerald-700 font-medium mt-1.5';
         } else if (isPython) {
           el.langHint.textContent = 'Python選択時は起動用スクリプト（.bat / .command等）の生成を自動でON提案します。';
           el.langHint.className = 'text-xs text-slate-500 mt-1.5';
@@ -1189,8 +1249,11 @@
           el.langHint.className = 'text-xs text-slate-500 mt-1.5';
         }
 
-        // OSに応じてスクリプトオプションのラベル文言を調整
-        if (state.os === 'Windows') {
+        // OS・構成に応じてスクリプトオプションのラベル文言を調整
+        if (isEmbed) {
+          el.optScriptTitle.textContent = '初回セットアップ用（setup.bat）＆起動用（start.bat）を生成する';
+          el.optScriptDesc.textContent = 'python_embed の初期設定を行う setup.bat と、ローカルサーバー起動＋自動でブラウザを開く start.bat を作成します。';
+        } else if (state.os === 'Windows') {
           el.optScriptTitle.textContent = '起動用・インストール用スクリプト（.bat）を生成する';
           el.optScriptDesc.textContent = 'Windowsでダブルクリックするだけで環境構築・起動ができる install.bat / run.bat を作成します。';
         } else if (state.os === 'Mac') {
@@ -1362,6 +1425,7 @@
         el.selectUiType.value = state.uiType;
 
         el.newPurpose.value = state.newPurpose;
+        el.newScene.value = state.newScene;
         el.newIo.value = state.newIo;
         el.newNotes.value = state.newNotes;
 
@@ -1403,8 +1467,9 @@
           missing.push('使用する言語名');
         }
         if (state.mode === 'new') {
-          if (!state.newPurpose.trim()) missing.push('何を作りたいか（目的・概要）');
-          if (!state.newIo.trim()) missing.push('入力と出力');
+          if (!state.newPurpose.trim()) missing.push('① 何を作るか（目的）');
+          if (!state.newScene.trim()) missing.push('② 誰が・どんな場面で使うか');
+          if (!state.newIo.trim()) missing.push('③ 入力と出力');
           if (!state.newBullets.some((b) => b.trim())) missing.push('やってほしいこと・機能（1つ以上）');
         } else {
           if (!state.modBullets.some((b) => b.trim())) missing.push('修正・追加したい内容（1つ以上）');
@@ -1412,8 +1477,25 @@
         return missing;
       }
 
+      function buildPortableTechLines() {
+        if (!isPortableEmbedLang(state.language)) return [];
+        const lines = [
+          'PC本体のPython環境に依存せず、同封の Windows Embeddable Package（`.\\python_embed\\python.exe`）を相対パスで起動するポータブル構成にしてください。',
+          '`python3xx._pth` の `import site` のコメントアウト解除や `get-pip.py` の導入手順を分かりやすく解説し、初回セットアップ用の `setup.bat` と起動用の `start.bat`（ローカルサーバー起動＋自動でブラウザを開く）を作成してください。',
+          'フロントエンドはブラウザUI（HTML / CSS / JavaScript / Canvas）とし、バックエンドのPythonローカルサーバー（標準の `http.server` または Flask / FastAPI 等、導入が簡単な構成）と連携させてください。',
+          '一時ファイルや書き出し先も含め、すべてのファイル参照をプロジェクトフォルダ内の相対パスで完結させ、USBメモリや外付けSSDのドライブ文字が変わっても問題なく動作するようにしてください。',
+        ];
+        if (state.language === 'python_embed_ffmpeg_ui') {
+          lines.push(
+            'FFmpegはPCの環境変数PATHに依存せず、プロジェクトフォルダ内の相対パス（例：`.\\ffmpeg\\bin\\ffmpeg.exe`）からポータブル版FFmpegを呼び出す設計にしてください。また、初心者向けにFFmpegの入手先と正しい配置場所をわかりやすく説明してください。'
+          );
+        }
+        return lines;
+      }
+
       function buildConstraintLines() {
         const lines = [];
+        const isEmbed = isPortableEmbedLang(state.language);
 
         // 言語おまかせ時の自動挿入
         if (state.language === 'auto') {
@@ -1436,12 +1518,12 @@
         }
 
         // ポータブル設計
-        if (state.optPortable) {
+        if (state.optPortable && !isEmbed) {
           lines.push('保存場所の指定がない場合、USBメモリ内や別PCへフォルダごと移動してもそのまま動作するように、特定の環境固有の絶対パスではなく相対パスで記述してください。');
         }
 
-        // 起動用・インストール用スクリプト
-        if (state.optScript) {
+        // 起動用・インストール用スクリプト（python_embed時は専用要件に含まれるため重複回避）
+        if (state.optScript && !isEmbed) {
           if (state.os === 'Windows') {
             lines.push('Windows初心者でもダブルクリックで簡単に扱えるよう、必要な環境構築・ライブラリ導入を行う「install.bat（インストール用）」と、プログラムを実行する「run.bat（起動用）」のバッチファイルもあわせて作成してください。');
           } else if (state.os === 'Mac') {
@@ -1494,17 +1576,18 @@
 
       function generatePrompt() {
         const lang = getEffectiveLanguage();
+        const portableLines = buildPortableTechLines();
         const constraints = buildConstraintLines();
         const existingCode = buildExistingCodeSection();
 
         if (state.llm === 'claude') {
-          return buildClaudeXmlPrompt(lang, constraints, existingCode);
+          return buildClaudeXmlPrompt(lang, portableLines, constraints, existingCode);
         }
-        return buildMarkdownPrompt(lang, constraints, existingCode);
+        return buildMarkdownPrompt(lang, portableLines, constraints, existingCode);
       }
 
       /** Claude向け：XMLタグ構造プロンプト */
-      function buildClaudeXmlPrompt(lang, constraints, existingCode) {
+      function buildClaudeXmlPrompt(lang, portableLines, constraints, existingCode) {
         const parts = [];
 
         parts.push(
@@ -1522,13 +1605,20 @@
         parts.push(`<task>\n${taskLines.join('\n')}\n</task>`);
 
         parts.push(
-          `<environment>\n- プログラミング言語: ${lang}\n- OS（動かしたいパソコン）: ${state.os}\n- 実行形態（見た目）: ${state.uiType}\n</environment>`
+          `<environment>\n- プログラミング言語・構成: ${lang}\n- 動作させるOS: ${state.os}\n- 実行形態・見た目: ${state.uiType}\n</environment>`
         );
+
+        if (portableLines.length > 0) {
+          parts.push(
+            `<portable_architecture>\n${portableLines.map((l) => `- ${l}`).join('\n')}\n</portable_architecture>`
+          );
+        }
 
         if (state.mode === 'new') {
           const reqLines = [
-            `- 何を作りたいか（目的・概要）: ${state.newPurpose.trim() || '（未入力）'}`,
-            `- 入力と出力: ${state.newIo.trim() || '（未入力）'}`,
+            `- ① 何を作るか（アプリ名・目的）: ${state.newPurpose.trim() || '（未入力）'}`,
+            `- ② 誰が・どんな場面で使うか: ${state.newScene.trim() || '（未入力）'}`,
+            `- ③ 入力と出力: ${state.newIo.trim() || '（未入力）'}`,
           ];
           const validBullets = state.newBullets.map((b) => b.trim()).filter(Boolean);
           if (validBullets.length > 0) {
@@ -1574,7 +1664,7 @@
       }
 
       /** 汎用型 / ChatGPT / Gemini 向け：構造化Markdownプロンプト */
-      function buildMarkdownPrompt(lang, constraints, existingCode) {
+      function buildMarkdownPrompt(lang, portableLines, constraints, existingCode) {
         const parts = [];
 
         // 冒頭挨拶・役割
@@ -1598,18 +1688,29 @@
         parts.push(
           [
             '## 1. 開発環境・基本設定',
-            `- **プログラミング言語**: ${lang}`,
-            `- **OS（動かしたいパソコン）**: ${state.os}`,
-            `- **実行形態（見た目）**: ${state.uiType}`,
+            `- **プログラミング言語・構成**: ${lang}`,
+            `- **動作させるOS**: ${state.os}`,
+            `- **実行形態・見た目**: ${state.uiType}`,
           ].join('\n')
         );
 
-        // 2. 要件セクション
+        let secNum = 2;
+
+        // ポータブル構成の技術要件（python_embed選択時のみ自動挿入）
+        if (portableLines.length > 0) {
+          parts.push(
+            [`## ${secNum}. USBポータブル構成（python_embed）の技術要件`, ...portableLines.map((l) => `- ${l}`)].join('\n')
+          );
+          secNum++;
+        }
+
+        // 要件セクション
         if (state.mode === 'new') {
           const reqLines = [
-            '## 2. 作りたいものの要件',
-            `- **何を作りたいか（目的・概要）**: ${state.newPurpose.trim() || '（未入力）'}`,
-            `- **入力と出力**: ${state.newIo.trim() || '（未入力）'}`,
+            `## ${secNum}. 作りたいものの要件`,
+            `- **① 何を作るか（アプリ名・目的）**: ${state.newPurpose.trim() || '（未入力）'}`,
+            `- **② 誰が・どんな場面で使うか**: ${state.newScene.trim() || '（未入力）'}`,
+            `- **③ 入力と出力**: ${state.newIo.trim() || '（未入力）'}`,
           ];
           const validBullets = state.newBullets.map((b) => b.trim()).filter(Boolean);
           reqLines.push('- **やってほしいこと・機能**:');
@@ -1623,7 +1724,7 @@
           }
           parts.push(reqLines.join('\n'));
         } else {
-          const modLines = ['## 2. 修正・機能追加の要件'];
+          const modLines = [`## ${secNum}. 修正・機能追加の要件`];
           if (state.modCurrentState.trim()) {
             modLines.push(`- **今どうなっているか（現状・起きている問題）**:\n  ${state.modCurrentState.trim().replace(/\n/g, '\n  ')}`);
           }
@@ -1642,9 +1743,10 @@
           }
           parts.push(modLines.join('\n'));
         }
+        secNum++;
 
-        // 3. 出力ルール・制約条件
-        const ruleLines = ['## 3. 出力形式・制約条件'];
+        // 出力ルール・制約条件
+        const ruleLines = [`## ${secNum}. 出力形式・制約条件`];
         constraints.forEach((c) => ruleLines.push(`- ${c}`));
         if (state.llm === 'chatgpt') {
           ruleLines.push('- ファイルが複数になる場合は、各コードブロックの直前にファイル名を明記してください。');
@@ -1652,10 +1754,11 @@
           ruleLines.push('- 回答は「1. 構成・方針の説明 → 2. コード全文 → 3. 実行手順・つまずきやすいポイント」の順で整理して出力してください。');
         }
         parts.push(ruleLines.join('\n'));
+        secNum++;
 
-        // 4. 既存コード
+        // 既存コード
         if (existingCode) {
-          parts.push(`## 4. 既存のコード\n\n${existingCode}`);
+          parts.push(`## ${secNum}. 既存のコード\n\n${existingCode}`);
         }
 
         return parts.join('\n\n');
@@ -1847,8 +1950,24 @@
         });
         el.selectLanguage.addEventListener('change', (e) => {
           state.language = e.target.value;
-          // Python選択時は起動用スクリプトオプションを自動ON提案
-          if (state.language === 'Python') {
+          // python_embed ポータブル構成選択時はおすすめ設定を一括自動連携
+          if (isPortableEmbedLang(state.language)) {
+            state.os = 'Windows';
+            state.uiType = 'ブラウザUI（ローカルサーバー＋HTML/Canvas）';
+            state.optScript = true;
+            state.optPortable = true;
+            state.optTree = true;
+            state.optSetupGuide = true;
+
+            el.selectOs.value = state.os;
+            el.selectUiType.value = state.uiType;
+            el.optScript.checked = true;
+            el.optPortable.checked = true;
+            el.optTree.checked = true;
+            el.optSetupGuide.checked = true;
+            showToast('USBポータブル構成に合わせてOS・UI・.bat生成などの設定を自動最適化しました', 'success');
+          } else if (state.language === 'Python') {
+            // Python選択時は起動用スクリプトオプションを自動ON提案
             state.optScript = true;
             el.optScript.checked = true;
           }
@@ -1872,6 +1991,10 @@
         // 新規作成モード入力
         el.newPurpose.addEventListener('input', (e) => {
           state.newPurpose = e.target.value;
+          updatePreview();
+        });
+        el.newScene.addEventListener('input', (e) => {
+          state.newScene = e.target.value;
           updatePreview();
         });
         el.newIo.addEventListener('input', (e) => {
