@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>プログラミング依頼用 プロンプトジェネレーター</title>
+  <title>プロンプトジェネレーター（プログラミング依頼用）</title>
 
   <!-- Tailwind CSS (CDN) -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -48,7 +48,7 @@
     @keyframes fadeSlideUp {
       from {
         opacity: 0;
-        transform: translateY(12px);
+        transform: translateY(10px);
       }
       to {
         opacity: 1;
@@ -56,7 +56,7 @@
       }
     }
     .toast-animate {
-      animation: fadeSlideUp 0.25s ease-out forwards;
+      animation: fadeSlideUp 0.22s ease-out forwards;
     }
   </style>
 </head>
@@ -65,7 +65,7 @@
   <!-- ==================== ヘッダー ==================== -->
   <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-xs">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-      <!-- ロゴ・タイトル -->
+      <!-- タイトル -->
       <div class="flex items-center gap-3">
         <div class="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center shadow-sm shrink-0">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -74,10 +74,10 @@
         </div>
         <div>
           <h1 class="text-base sm:text-lg font-bold text-slate-900 tracking-tight leading-tight">
-            プログラミング依頼用 プロンプトジェネレーター
+            プロンプトジェネレーター（プログラミング依頼用）
           </h1>
           <p class="text-xs text-slate-500">
-            質問に答えるだけで、AIに伝わるプログラミング依頼文をかんたん作成
+            初心者でも迷わずAIに伝わる開発・修正プロンプトをかんたん作成
           </p>
         </div>
       </div>
@@ -117,14 +117,14 @@
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
           </svg>
-          全リセット
+          リセット
         </button>
       </div>
     </div>
   </header>
 
-  <!-- ==================== サンプル（記入例）バー ==================== -->
-  <div class="bg-indigo-50/70 border-b border-indigo-100">
+  <!-- ==================== クイックサンプルバー ==================== -->
+  <div class="bg-indigo-50/75 border-b border-indigo-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
       <div class="flex items-center gap-1.5 text-xs font-bold text-indigo-800 shrink-0">
         <svg class="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -135,46 +135,42 @@
       <div class="flex flex-wrap items-center gap-2">
         <button
           type="button"
-          data-sample="usb_video_editor"
+          id="btnSample1"
+          data-sample="usb_video_ffmpeg"
           class="sample-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-indigo-700 border border-indigo-200 hover:bg-indigo-600 hover:text-white hover:border-indigo-600 transition shadow-2xs cursor-pointer"
         >
           例1：USB完結・動画カット＆音声追加（python_embed＋FFmpeg）
         </button>
         <button
           type="button"
-          data-sample="python_resize"
+          id="btnSample2"
+          data-sample="auto_timer"
           class="sample-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-indigo-700 border border-indigo-200 hover:bg-indigo-600 hover:text-white hover:border-indigo-600 transition shadow-2xs cursor-pointer"
         >
-          例2：画像リサイズ・一括リネーム（Python）
+          例2：言語おまかせ・学習タイマー
         </button>
         <button
           type="button"
-          data-sample="pomodoro_auto"
+          id="btnSample3"
+          data-sample="fix_error_newchat"
           class="sample-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-indigo-700 border border-indigo-200 hover:bg-indigo-600 hover:text-white hover:border-indigo-600 transition shadow-2xs cursor-pointer"
         >
-          例3：学習用タイマーアプリ（言語おまかせ）
-        </button>
-        <button
-          type="button"
-          data-sample="bugfix_button"
-          class="sample-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-indigo-700 border border-indigo-200 hover:bg-indigo-600 hover:text-white hover:border-indigo-600 transition shadow-2xs cursor-pointer"
-        >
-          例4：ボタンが動かないエラー修正（修正モード）
+          例3：エラー修正依頼（新しいチャット）
         </button>
       </div>
     </div>
   </div>
 
-  <!-- ==================== メインコンテンツ (PC: 2カラム / スマホ: 縦積み) ==================== -->
+  <!-- ==================== メインコンテンツ ==================== -->
   <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
       <!-- ==================== 左カラム：入力フォーム ==================== -->
       <div class="lg:col-span-7 space-y-6">
 
-        <!-- 1. モード切替タブ -->
-        <section class="bg-white rounded-2xl border border-slate-200 shadow-xs p-4 sm:p-5">
-          <h2 class="text-sm font-bold text-slate-700 tracking-wide flex items-center gap-2 mb-3">
+        <!-- 1. モード切替タブ＆修正サブオプション -->
+        <section class="bg-white rounded-2xl border border-slate-200 shadow-xs p-4 sm:p-5 space-y-4">
+          <h2 class="text-sm font-bold text-slate-700 tracking-wide flex items-center gap-2">
             <span class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-700 inline-flex items-center justify-center text-xs font-bold">1</span>
             依頼モードを選択
           </h2>
@@ -194,7 +190,7 @@
             </button>
             <button
               type="button"
-              id="tabModeModify"
+              id="tabModeFix"
               role="tab"
               aria-selected="false"
               class="py-2.5 px-3 rounded-lg text-sm font-bold transition flex items-center justify-center gap-2 text-slate-600 hover:text-slate-900 cursor-pointer"
@@ -205,9 +201,95 @@
               <span>修正・機能追加モード</span>
             </button>
           </div>
+
+          <!-- 修正モード専用：チャット継続 / 新しいチャット切替 -->
+          <div id="fixContextSection" class="hidden pt-2 border-t border-slate-100 space-y-4">
+            <div>
+              <p class="text-sm font-semibold text-slate-800 mb-2">チャットの状況</p>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <label id="cardFixContinue" class="flex items-start gap-3 p-3.5 rounded-xl border-2 border-indigo-600 bg-indigo-50/50 cursor-pointer transition">
+                  <input type="radio" name="fixContext" value="continue" checked class="mt-1 text-indigo-600 focus:ring-indigo-500" />
+                  <div>
+                    <div class="text-sm font-bold text-slate-900">同じチャットで継続する</div>
+                    <p class="text-xs text-slate-600 mt-0.5">直前のやり取りやコードがAIに残っている場合</p>
+                  </div>
+                </label>
+
+                <label id="cardFixNew" class="flex items-start gap-3 p-3.5 rounded-xl border-2 border-slate-200 bg-white hover:border-slate-300 cursor-pointer transition">
+                  <input type="radio" name="fixContext" value="new" class="mt-1 text-indigo-600 focus:ring-indigo-500" />
+                  <div>
+                    <div class="text-sm font-bold text-slate-900">新しいチャットで修正する（トークン切れ等）</div>
+                    <p class="text-xs text-slate-600 mt-0.5">既存のコードをアップロードまたは貼り付けて渡す場合</p>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- 「新しいチャット」選択時のコード入力エリア -->
+            <div id="fixNewChatCodeBox" class="hidden bg-slate-50 rounded-xl border border-slate-200 p-4 space-y-4">
+              <div class="flex items-center justify-between">
+                <h3 class="text-sm font-bold text-slate-800 flex items-center gap-1.5">
+                  <svg class="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m6.75 12l-3-3m0 0l-3 3m3-3v6m-1.5-15H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                  </svg>
+                  既存コードの共有
+                </h3>
+                <span class="text-xs text-slate-500">複数ファイル対応</span>
+              </div>
+
+              <!-- ドラッグ＆ドロップ / ファイル選択 -->
+              <div
+                id="dropZone"
+                class="border-2 border-dashed border-slate-300 rounded-xl p-5 text-center bg-white hover:border-indigo-400 hover:bg-indigo-50/30 transition cursor-pointer"
+              >
+                <svg class="w-8 h-8 mx-auto text-slate-400 mb-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
+                </svg>
+                <p class="text-sm font-medium text-slate-700">コードファイルをここにドラッグ＆ドロップ</p>
+                <p class="text-xs text-slate-500 mt-1">またはクリックしてファイルを選択（.py, .html, .js, .css, .txt, .json など）</p>
+                <input
+                  type="file"
+                  id="codeFileInput"
+                  multiple
+                  accept=".py,.html,.htm,.css,.js,.ts,.jsx,.tsx,.json,.txt,.md,.ino,.pde,.java,.cs,.c,.cpp,.h,.bat,.sh,.command,.xml,.yaml,.yml,.sql,.csv"
+                  class="hidden"
+                />
+              </div>
+
+              <!-- 添付済みファイルチップ一覧 -->
+              <div id="uploadedFilesWrapper" class="hidden space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-semibold text-slate-600">読み込み済みファイル（プロンプトに自動埋め込み）</span>
+                  <button type="button" id="btnClearFiles" class="text-xs text-rose-600 hover:underline cursor-pointer">すべて削除</button>
+                </div>
+                <div id="uploadedFilesChips" class="flex flex-wrap gap-2"></div>
+              </div>
+
+              <!-- 直接貼り付けテキストエリア -->
+              <div>
+                <label for="pastedCode" class="block text-xs font-semibold text-slate-700 mb-1">
+                  または、現在のコードを直接貼り付け（任意）
+                </label>
+                <textarea
+                  id="pastedCode"
+                  rows="5"
+                  class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-xs font-mono text-slate-800 bg-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition"
+                  placeholder="ここにソースコードを貼り付けると、プロンプト末尾にコードブロックとして埋め込まれます..."
+                ></textarea>
+              </div>
+
+              <!-- チャット画面に直接添付する旨を記載 -->
+              <label class="flex items-start gap-2.5 p-3 rounded-xl bg-white border border-slate-200 cursor-pointer hover:bg-slate-50 transition has-[:checked]:border-indigo-400 has-[:checked]:bg-indigo-50/40">
+                <input type="checkbox" id="chkAttachNotice" class="mt-0.5 w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500" />
+                <span class="text-xs sm:text-sm text-slate-700">
+                  <span class="font-semibold text-slate-900">コードはチャット画面に直接添付（アップロード）する旨をプロンプトに記載する</span>
+                </span>
+              </label>
+            </div>
+          </div>
         </section>
 
-        <!-- 2. 共通設定エリア（LLM / 言語 / OS / 実行形態） -->
+        <!-- 2. 基本設定カード -->
         <section class="bg-white rounded-2xl border border-slate-200 shadow-xs p-4 sm:p-5 space-y-4">
           <h2 class="text-sm font-bold text-slate-700 tracking-wide flex items-center gap-2">
             <span class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-700 inline-flex items-center justify-center text-xs font-bold">2</span>
@@ -224,10 +306,10 @@
                 id="selectLlm"
                 class="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-800 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition"
               >
-                <option value="general">汎用型（デフォルト・その他AI）</option>
-                <option value="chatgpt">ChatGPT (OpenAI)</option>
-                <option value="claude">Claude (Anthropic) ※XML構造最適化</option>
-                <option value="gemini">Gemini (Google)</option>
+                <option value="general">汎用型（指定なし）</option>
+                <option value="chatgpt">ChatGPT</option>
+                <option value="claude">Claude（XMLタグ構造で最適化）</option>
+                <option value="gemini">Gemini</option>
               </select>
               <p id="llmHint" class="text-xs text-slate-500 mt-1.5">
                 どのAIでも読みやすい標準的なMarkdown構造で出力します。
@@ -243,23 +325,23 @@
                 id="selectLanguage"
                 class="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-800 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition"
               >
-                <option value="auto">★ わからない（AIにおまかせ）</option>
-                <option value="python_embed_ui">Python (python_embed) + ブラウザUI (HTML/Canvas) ★ポータブル</option>
-                <option value="python_embed_ffmpeg_ui">Python (python_embed) + FFmpeg + ブラウザUI (HTML/Canvas) ★USB動画/音声処理</option>
-                <option value="Python">Python</option>
-                <option value="HTML / CSS / JavaScript（単一ファイル・Webアプリ）">HTML / CSS / JavaScript（単一ファイル・Webアプリ）</option>
-                <option value="Processing / p5.js">Processing / p5.js</option>
-                <option value="Arduino (C++)">Arduino (C++)</option>
-                <option value="JavaScript / TypeScript (Node.js)">JavaScript / TypeScript (Node.js)</option>
-                <option value="C# / Unity">C# / Unity</option>
+                <option value="auto">わからない（AIにおまかせ・初心者向け提案）</option>
+                <option value="python_embed_web">Python (python_embed) + ブラウザUI (HTML/Canvas) [USBポータブル構成]</option>
+                <option value="python_embed_ffmpeg">Python (python_embed) + FFmpeg + ブラウザUI (HTML/Canvas) [USB完結・動画/音声処理]</option>
+                <option value="python">Python（通常）</option>
+                <option value="html_js">HTML / CSS / JavaScript（単一ファイル・ブラウザ完結）</option>
+                <option value="nodejs">JavaScript / Node.js</option>
+                <option value="react">TypeScript / React</option>
+                <option value="csharp">C# / Unity</option>
+                <option value="arduino">C++ / Arduino</option>
                 <option value="other">その他（自由入力）</option>
               </select>
               <p id="langHint" class="text-xs text-indigo-600 mt-1.5">
-                迷ったら「おまかせ」でOK！初心者が動かしやすい言語をAIが選んでくれます。
+                迷ったら「おまかせ」でOK！初心者がつまずきにくい言語をAIが選んでくれます。
               </p>
             </div>
 
-            <!-- OS（動かしたいパソコン） -->
+            <!-- OS -->
             <div>
               <label for="selectOs" class="flex items-center gap-2 text-sm font-semibold text-slate-800 mb-1.5">
                 <span>動作させるOS</span>
@@ -269,44 +351,31 @@
                 id="selectOs"
                 class="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-800 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition"
               >
-                <option value="Windows">Windows</option>
-                <option value="Mac">Mac</option>
-                <option value="どちらでも（Webブラウザ）">どちらでも（Webブラウザ）</option>
-                <option value="指定なし">指定なし</option>
+                <option value="windows">Windows</option>
+                <option value="mac">Mac</option>
+                <option value="browser">どちらでも（Webブラウザ）</option>
+                <option value="any">指定なし</option>
               </select>
             </div>
 
             <!-- 実行形態（見た目） -->
             <div>
-              <label for="selectUiType" class="block text-sm font-semibold text-slate-800 mb-1.5">
-                実行形態・見た目
+              <label for="selectUiStyle" class="block text-sm font-semibold text-slate-800 mb-1.5">
+                実行形態（見た目）
               </label>
               <select
-                id="selectUiType"
+                id="selectUiStyle"
                 class="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-800 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition"
               >
-                <option value="AIにおまかせ">AIにおまかせ</option>
-                <option value="ボタンのある画面（GUIアプリ）">ボタンのある画面（GUIアプリ）</option>
-                <option value="ブラウザUI（ローカルサーバー＋HTML/Canvas）">ブラウザUI（ローカルサーバー＋HTML/Canvas）</option>
-                <option value="Webページ（HTML単体）">Webページ（HTML単体）</option>
-                <option value="黒い画面（CUI・コマンドライン）">黒い画面（CUI・コマンドライン）</option>
+                <option value="gui">ボタンのある画面（GUI / ブラウザUI）</option>
+                <option value="cui">黒い画面（CUI / コンソール）</option>
+                <option value="auto">AIにおまかせ</option>
               </select>
             </div>
           </div>
 
-          <!-- ポータブル構成（python_embed）選択時の案内バナー -->
-          <div id="portableInfoBanner" class="hidden rounded-xl border border-emerald-200 bg-emerald-50/80 p-3.5 text-xs text-emerald-900 space-y-1.5">
-            <div class="flex items-center gap-2 font-bold text-emerald-800">
-              <span class="px-2 py-0.5 rounded-full bg-emerald-600 text-white text-[11px]">USBポータブル構成 ON</span>
-              <span id="portableInfoTitle">PC本体を汚さずUSBメモリ内で完結動作する構成が選ばれました</span>
-            </div>
-            <p id="portableInfoDesc" class="leading-relaxed text-emerald-800">
-              OS（Windows）、ブラウザUI、setup.bat／start.bat生成、相対パス設計、フォルダ構成ツリー、導入手順を自動で最適化しました。プロンプトには <code class="px-1 py-0.5 rounded bg-white/80 font-mono text-[11px]">.\python_embed\python.exe</code> や <code class="px-1 py-0.5 rounded bg-white/80 font-mono text-[11px]">._pth</code> 設定などの技術要件が自動で組み込まれます。
-            </p>
-          </div>
-
-          <!-- 「その他」言語の自由入力 -->
-          <div id="otherLangContainer" class="hidden pt-1">
+          <!-- 「その他」言語の自由入力欄 -->
+          <div id="otherLangBox" class="hidden pt-1">
             <label for="inputOtherLang" class="flex items-center gap-2 text-sm font-semibold text-slate-800 mb-1">
               <span>使用する言語名を入力</span>
               <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-rose-100 text-rose-700">必須</span>
@@ -315,375 +384,237 @@
               type="text"
               id="inputOtherLang"
               class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm text-slate-800 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition"
-              placeholder="例：GAS（Google Apps Script）、Ruby、PHP、Java、Swift など"
+              placeholder="例：GAS（Google Apps Script）、PHP、Ruby、Swift、Go など"
             />
           </div>
-        </section>
 
-        <!-- ==================== 3A. 新規作成モードの入力項目 ==================== -->
-        <section id="sectionNewMode" class="bg-white rounded-2xl border border-slate-200 shadow-xs p-4 sm:p-5 space-y-5">
-          <div>
-            <h2 class="text-sm font-bold text-slate-700 tracking-wide flex items-center gap-2">
-              <span class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-700 inline-flex items-center justify-center text-xs font-bold">3</span>
-              作りたいものの内容（新規作成）
-            </h2>
-            <p class="text-xs text-slate-500 mt-1">
-              赤い「必須」の項目を埋めるだけで、AIが迷わずコードを書けるようになります。
-            </p>
-          </div>
-
-          <!-- ① 何を作るか（アプリ名・一言でいう目的） -->
-          <div>
-            <label for="newPurpose" class="flex items-center gap-2 text-sm font-semibold text-slate-800 mb-1">
-              <span>① 何を作るか（アプリ名・一言でいう目的）</span>
-              <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-rose-100 text-rose-700">必須</span>
-            </label>
-            <p class="text-xs text-slate-500 mb-1.5">「どんなツール・アプリを作りたいか」を普段の言葉で書いてください。</p>
-            <textarea
-              id="newPurpose"
-              rows="2"
-              class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm text-slate-800 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition"
-              placeholder="例：フォルダ内の画像をまとめて縮小して、連番のファイル名に変更するツールを作りたい"
-            ></textarea>
-          </div>
-
-          <!-- ② 誰が・どんな場面で使うか（利用シーン・想定ユーザー） -->
-          <div>
-            <label for="newScene" class="flex items-center gap-2 text-sm font-semibold text-slate-800 mb-1">
-              <span>② 誰が・どんな場面で使うか（利用シーン・想定ユーザー）</span>
-              <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-rose-100 text-rose-700">必須</span>
-            </label>
-            <p class="text-xs text-slate-500 mb-1.5">使う人のITスキルや使う場所（自宅PC、学校の共用PC、USBメモリ内など）を書くと親切なUIになります。</p>
-            <textarea
-              id="newScene"
-              rows="2"
-              class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm text-slate-800 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition"
-              placeholder="例：プログラミング初心者の自分が、学校や職場の共用Windows PCにUSBメモリを挿して作業するときに使う"
-            ></textarea>
-          </div>
-
-          <!-- ③ 入力するものと、出力・結果として得たいもの -->
-          <div>
-            <label for="newIo" class="flex items-center gap-2 text-sm font-semibold text-slate-800 mb-1">
-              <span>③ 入力するものと、出力・結果として得たいもの</span>
-              <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-rose-100 text-rose-700">必須</span>
-            </label>
-            <p class="text-xs text-slate-500 mb-1.5">「〜を入れると → 〜が出力される」の形で書くと、イメージのズレを防げます。</p>
-            <textarea
-              id="newIo"
-              rows="2"
-              class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm text-slate-800 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition"
-              placeholder="例：フォルダ内の画像を入れると、幅800pxに縮小して別フォルダに保存される"
-            ></textarea>
-          </div>
-
-          <!-- 3. やってほしいこと・機能（箇条書き・必須） -->
-          <div>
-            <div class="flex items-center gap-2 text-sm font-semibold text-slate-800 mb-1">
-              <span>やってほしいこと・機能（箇条書き）</span>
-              <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-rose-100 text-rose-700">必須</span>
+          <!-- USBポータブル構成バナー -->
+          <div id="portableBanner" class="hidden rounded-xl border border-emerald-200 bg-emerald-50/85 p-3.5 text-xs text-emerald-900 space-y-1">
+            <div class="flex flex-wrap items-center gap-2 font-bold text-emerald-800">
+              <span class="px-2 py-0.5 rounded-full bg-emerald-600 text-white text-[11px]">USBポータブル構成</span>
+              <span id="portableBannerTitle">PC本体にインストール不要・USBメモリ内で完結動作する構成です</span>
             </div>
-            <p class="text-xs text-slate-500 mb-2.5">
-              1つの欄に1つずつ機能を書くとAIに正確に伝わります。Enterキーでも次の欄を追加できます。
+            <p id="portableBannerDesc" class="leading-relaxed text-emerald-800">
+              OS（Windows）、GUI/ブラウザUI、setup.bat／start.bat生成、相対パス設計、ディレクトリツリー、初心者向け導入手順を自動設定しました。
             </p>
-
-            <div id="newBulletList" class="space-y-2.5"></div>
-
-            <button
-              type="button"
-              id="btnAddNewBullet"
-              class="mt-3 inline-flex items-center gap-1.5 px-4 py-2 text-xs sm:text-sm font-semibold text-indigo-700 bg-indigo-50 hover:bg-indigo-100 active:bg-indigo-200 rounded-xl transition cursor-pointer"
-            >
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-              </svg>
-              ＋ 項目を追加
-            </button>
-          </div>
-
-          <!-- 4. 補足・こだわり（任意） -->
-          <div class="pt-3 border-t border-slate-100">
-            <label for="newNotes" class="flex items-center gap-2 text-sm font-semibold text-slate-800 mb-1">
-              <span>補足・こだわり（任意）</span>
-              <span class="px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-600">任意</span>
-            </label>
-            <p class="text-xs text-slate-500 mb-1.5">デザインの好み、使いたいライブラリ、オフライン環境での利用などがあれば自由に書いてください。</p>
-            <textarea
-              id="newNotes"
-              rows="2"
-              class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm text-slate-800 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition"
-              placeholder="例：見た目はシンプルで明るいデザインにしてほしい。日本語でわかりやすいボタン名にしてほしい。"
-            ></textarea>
           </div>
         </section>
 
-        <!-- ==================== 3B. 修正・機能追加モードの入力項目 ==================== -->
-        <section id="sectionModifyMode" class="hidden bg-white rounded-2xl border border-slate-200 shadow-xs p-4 sm:p-5 space-y-5">
+        <!-- 3. 必須質問カード（初学者ガイド） -->
+        <section class="bg-white rounded-2xl border border-slate-200 shadow-xs p-4 sm:p-5 space-y-4">
           <div>
             <h2 class="text-sm font-bold text-slate-700 tracking-wide flex items-center gap-2">
               <span class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-700 inline-flex items-center justify-center text-xs font-bold">3</span>
-              修正・機能追加の内容
+              <span id="requiredSectionTitle">必須質問・初学者ガイド（作りたいものの基本）</span>
             </h2>
-            <p class="text-xs text-slate-500 mt-1">
-              チャットの状況と「現状・理想・直したい内容」を整理して伝えましょう。
+            <p id="requiredSectionSub" class="text-xs text-slate-500 mt-1">
+              まずはこの3つを埋めるだけで、AIが意図を正確に理解してコードを書けるようになります。
             </p>
           </div>
 
-          <!-- チャット状況の選択 -->
-          <div>
-            <p class="text-sm font-semibold text-slate-800 mb-2">チャットの状況を選んでください</p>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <label id="cardChatContinue" class="relative flex items-start gap-3 p-3.5 rounded-xl border-2 cursor-pointer transition border-indigo-600 bg-indigo-50/50">
-                <input type="radio" name="chatState" value="continue" checked class="mt-1 text-indigo-600 focus:ring-indigo-500" />
-                <div>
-                  <div class="text-sm font-bold text-slate-900">同じチャットで続けて修正する</div>
-                  <p class="text-xs text-slate-600 mt-0.5">直前のコードややり取りがAIに残っている場合</p>
-                </div>
-              </label>
-
-              <label id="cardChatNew" class="relative flex items-start gap-3 p-3.5 rounded-xl border-2 cursor-pointer transition border-slate-200 hover:border-slate-300 bg-white">
-                <input type="radio" name="chatState" value="new_chat" class="mt-1 text-indigo-600 focus:ring-indigo-500" />
-                <div>
-                  <div class="text-sm font-bold text-slate-900">新しいチャットで修正する</div>
-                  <p class="text-xs text-slate-600 mt-0.5">トークン切れ・やり直し等でコードを渡し直す場合</p>
-                </div>
-              </label>
-            </div>
-          </div>
-
-          <!-- 「新しいチャット」選択時のコード提供エリア -->
-          <div id="newChatCodePanel" class="hidden bg-slate-50 rounded-xl border border-slate-200 p-4 space-y-4">
-            <div class="flex items-center justify-between">
-              <h3 class="text-sm font-bold text-slate-800 flex items-center gap-1.5">
-                <svg class="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m6.75 12l-3-3m0 0l-3 3m3-3v6m-1.5-15H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-                </svg>
-                現在のコードの共有方法
-              </h3>
-              <span class="text-xs text-slate-500">複数ファイル対応</span>
-            </div>
-
-            <!-- 直接添付チェックボックス -->
-            <label class="flex items-start gap-2.5 p-3 rounded-xl bg-white border border-slate-200 cursor-pointer hover:bg-slate-50 transition has-[:checked]:border-indigo-400 has-[:checked]:bg-indigo-50/40">
-              <input type="checkbox" id="chkAttachDirect" class="mt-0.5 w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500" />
-              <span class="text-xs sm:text-sm text-slate-700">
-                <span class="font-semibold text-slate-900">コードはプロンプトに含めず、チャット画面にファイルを直接添付する</span><br />
-                <span class="text-xs text-slate-500">ONにすると「添付ファイルを参照してください」という指示文のみを挿入します</span>
-              </span>
-            </label>
-
-            <!-- アップロード＆貼り付けコンテナ（直接添付ON時は薄く表示） -->
-            <div id="codeEmbedInputs" class="space-y-4 transition-opacity">
-              <!-- ドラッグ＆ドロップエリア -->
-              <div
-                id="dropZone"
-                class="border-2 border-dashed border-slate-300 rounded-xl p-5 text-center bg-white hover:border-indigo-400 hover:bg-indigo-50/30 transition cursor-pointer"
-              >
-                <svg class="w-8 h-8 mx-auto text-slate-400 mb-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
-                </svg>
-                <p class="text-sm font-medium text-slate-700">
-                  コードファイルをここにドラッグ＆ドロップ
-                </p>
-                <p class="text-xs text-slate-500 mt-1">
-                  またはクリックしてファイルを選択（.py, .html, .js, .css, .ino, .txt, .json など）
-                </p>
-                <input
-                  type="file"
-                  id="codeFileInput"
-                  multiple
-                  accept=".py,.html,.htm,.css,.js,.ts,.jsx,.tsx,.json,.txt,.md,.ino,.pde,.java,.cs,.c,.cpp,.h,.bat,.sh,.command,.xml,.yaml,.yml,.sql,.csv"
-                  class="hidden"
-                />
-              </div>
-
-              <!-- 読み込んだファイル一覧 -->
-              <div id="uploadedFileList" class="hidden space-y-2">
-                <div class="flex items-center justify-between">
-                  <span class="text-xs font-semibold text-slate-600">読み込み済みファイル（プロンプト末尾に自動埋め込み）</span>
-                  <button type="button" id="btnClearFiles" class="text-xs text-rose-600 hover:underline cursor-pointer">すべて削除</button>
-                </div>
-                <div id="uploadedFileItems" class="flex flex-wrap gap-2"></div>
-              </div>
-
-              <!-- コード直接貼り付けエリア -->
-              <div>
-                <label for="pastedCode" class="block text-xs font-semibold text-slate-700 mb-1">
-                  または、現在のコードを直接貼り付ける（任意）
-                </label>
-                <textarea
-                  id="pastedCode"
-                  rows="4"
-                  class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-xs font-mono text-slate-800 bg-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition"
-                  placeholder="ここにソースコードを貼り付けると、プロンプト末尾にコードブロックとして自動で埋め込まれます..."
-                ></textarea>
-              </div>
-            </div>
-          </div>
-
-          <!-- エラー報告・現状と期待（初学者補助テンプレート） -->
-          <div class="space-y-4 pt-2 border-t border-slate-100">
-            <p class="text-xs font-bold text-indigo-700 uppercase tracking-wider">現状と期待の整理（エラー報告テンプレート）</p>
-
-            <!-- 今どうなっているか -->
+          <!-- 新規作成モード用の必須質問 -->
+          <div id="newRequiredFields" class="space-y-4">
             <div>
-              <label for="modCurrentState" class="flex items-center gap-2 text-sm font-semibold text-slate-800 mb-1">
-                <span>今どうなっているか（現状・起きている問題）</span>
-                <span class="px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-600">推奨</span>
+              <label for="newGoal" class="flex items-center gap-2 text-sm font-semibold text-slate-800 mb-1">
+                <span>① 何を作りたいか（ゴール・概要）</span>
+                <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-rose-100 text-rose-700">必須</span>
               </label>
               <textarea
-                id="modCurrentState"
+                id="newGoal"
                 rows="2"
                 class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm text-slate-800 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition"
-                placeholder="例：画面は表示されるが、実行ボタンを押しても何も反応しない"
+                placeholder="例：フォルダ内の画像をまとめて縮小して連番ファイル名に変換するツールを作りたい"
               ></textarea>
             </div>
 
-            <!-- どうなってほしいか -->
             <div>
-              <label for="modExpectedState" class="flex items-center gap-2 text-sm font-semibold text-slate-800 mb-1">
-                <span>どうなってほしいか（期待する動作）</span>
-                <span class="px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-600">推奨</span>
+              <label for="newScene" class="flex items-center gap-2 text-sm font-semibold text-slate-800 mb-1">
+                <span>② 誰が・どんな場面で使うか（利用シーン）</span>
+                <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-rose-100 text-rose-700">必須</span>
               </label>
               <textarea
-                id="modExpectedState"
+                id="newScene"
                 rows="2"
                 class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm text-slate-800 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition"
-                placeholder="例：ボタンを押したら計算結果が画面に表示され、完了メッセージが出てほしい"
+                placeholder="例：プログラミング初心者の自分が、学校のWindows PCにUSBメモリを挿して使う"
               ></textarea>
             </div>
 
-            <!-- エラーメッセージ貼り付け欄 -->
             <div>
-              <label for="modErrorMessage" class="flex items-center gap-2 text-sm font-semibold text-slate-800 mb-1">
-                <span>エラーメッセージ（出ていればそのまま貼り付け）</span>
+              <label for="newIo" class="flex items-center gap-2 text-sm font-semibold text-slate-800 mb-1">
+                <span>③ 入力と出力（何を入れて、何が出てくるか）</span>
+                <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-rose-100 text-rose-700">必須</span>
+              </label>
+              <textarea
+                id="newIo"
+                rows="2"
+                class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm text-slate-800 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition"
+                placeholder="例：MP4動画とBGM音声を入れると、カット＋音声合成されたMP4動画がoutputフォルダに書き出される"
+              ></textarea>
+            </div>
+          </div>
+
+          <!-- 修正・機能追加モード用の必須質問 -->
+          <div id="fixRequiredFields" class="hidden space-y-4">
+            <div>
+              <label for="fixCurrent" class="flex items-center gap-2 text-sm font-semibold text-slate-800 mb-1">
+                <span>① 現状（今どうなっているか・何が起きているか）</span>
+                <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-rose-100 text-rose-700">必須</span>
+              </label>
+              <textarea
+                id="fixCurrent"
+                rows="2"
+                class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm text-slate-800 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition"
+                placeholder="例：スクリプトを実行すると途中で止まってしまい、変換後のファイルが出力されない"
+              ></textarea>
+            </div>
+
+            <div>
+              <label for="fixExpected" class="flex items-center gap-2 text-sm font-semibold text-slate-800 mb-1">
+                <span>② 期待（どうなってほしいか）</span>
+                <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-rose-100 text-rose-700">必須</span>
+              </label>
+              <textarea
+                id="fixExpected"
+                rows="2"
+                class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm text-slate-800 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition"
+                placeholder="例：エラーが出ずに正常に処理が完了し、outputフォルダに結果が保存されてほしい"
+              ></textarea>
+            </div>
+
+            <div>
+              <label for="fixErrorMsg" class="flex items-center gap-2 text-sm font-semibold text-slate-800 mb-1">
+                <span>③ エラーメッセージ（任意・そのまま貼り付け）</span>
                 <span class="px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-600">任意</span>
               </label>
               <textarea
-                id="modErrorMessage"
+                id="fixErrorMsg"
                 rows="3"
                 class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-xs font-mono text-slate-800 bg-slate-50/70 focus:bg-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition"
-                placeholder="例：TypeError: Cannot read properties of null (reading 'addEventListener') at index.html:42"
+                placeholder="例：FileNotFoundError: [Errno 2] No such file or directory: 'data/input.csv'"
               ></textarea>
             </div>
           </div>
-
-          <!-- 修正・追加したい内容（箇条書き・必須） -->
-          <div class="pt-2 border-t border-slate-100">
-            <div class="flex items-center gap-2 text-sm font-semibold text-slate-800 mb-1">
-              <span>修正・追加したい内容（箇条書き）</span>
-              <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-rose-100 text-rose-700">必須</span>
-            </div>
-            <p class="text-xs text-slate-500 mb-2.5">
-              直してほしい点や追加したい機能を1つずつ入力してください。
-            </p>
-
-            <div id="modBulletList" class="space-y-2.5"></div>
-
-            <button
-              type="button"
-              id="btnAddModBullet"
-              class="mt-3 inline-flex items-center gap-1.5 px-4 py-2 text-xs sm:text-sm font-semibold text-indigo-700 bg-indigo-50 hover:bg-indigo-100 active:bg-indigo-200 rounded-xl transition cursor-pointer"
-            >
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-              </svg>
-              ＋ 項目を追加
-            </button>
-          </div>
         </section>
 
-        <!-- 4. 出力・サポートオプション -->
-        <section class="bg-white rounded-2xl border border-slate-200 shadow-xs p-4 sm:p-5 space-y-5">
+        <!-- 4. 動的箇条書きリストカード -->
+        <section class="bg-white rounded-2xl border border-slate-200 shadow-xs p-4 sm:p-5 space-y-4">
           <div>
             <h2 class="text-sm font-bold text-slate-700 tracking-wide flex items-center gap-2">
               <span class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-700 inline-flex items-center justify-center text-xs font-bold">4</span>
+              <span id="bulletSectionTitle">やりたいこと・機能（箇条書き）</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-rose-100 text-rose-700">必須</span>
+            </h2>
+            <p class="text-xs text-slate-500 mt-1">
+              1行に1つずつ書くとAIに正確に伝わります。Enterキーで新しい行を追加できます。
+            </p>
+          </div>
+
+          <div id="bulletListContainer" class="space-y-2.5"></div>
+
+          <button
+            type="button"
+            id="btnAddBullet"
+            class="inline-flex items-center gap-1.5 px-4 py-2 text-xs sm:text-sm font-semibold text-indigo-700 bg-indigo-50 hover:bg-indigo-100 active:bg-indigo-200 rounded-xl transition cursor-pointer"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+            ＋ 項目を追加
+          </button>
+        </section>
+
+        <!-- 5. 出力・初心者サポートオプションカード -->
+        <section class="bg-white rounded-2xl border border-slate-200 shadow-xs p-4 sm:p-5 space-y-5">
+          <div>
+            <h2 class="text-sm font-bold text-slate-700 tracking-wide flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-700 inline-flex items-center justify-center text-xs font-bold">5</span>
               出力・初心者サポートオプション
             </h2>
             <p class="text-xs text-slate-500 mt-1">
-              初学者がつまずきやすいポイントを防ぐための指示をワンクリックで組み込めます。
+              チェックを入れるだけで、つまずきを防ぐための重要な制約をプロンプトに自動追加します。
             </p>
           </div>
 
           <div class="space-y-2.5">
-            <!-- 省略禁止（コード全文出力） -->
-            <label class="flex items-start gap-3 p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition has-[:checked]:border-indigo-200 has-[:checked]:bg-indigo-50/30">
-              <input type="checkbox" id="optNoOmit" checked class="mt-0.5 w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500" />
+            <!-- スクリプト生成 -->
+            <label class="flex items-start gap-3 p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition has-[:checked]:border-indigo-200 has-[:checked]:bg-indigo-50/35">
+              <input type="checkbox" id="optBat" class="mt-0.5 w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500" />
               <div class="flex-1">
-                <div class="text-sm font-semibold text-slate-800">省略禁止（そのままコピペで動く完全なコード全文を出力）</div>
-                <p class="text-xs text-slate-500 mt-0.5">「// 以下省略」などを防ぎ、修正ミスやコピペ迷子をなくします。</p>
+                <div class="flex flex-wrap items-center gap-2">
+                  <span id="optBatLabel" class="text-sm font-semibold text-slate-800">起動用・インストール用スクリプト（setup.bat / start.bat 等）も生成する</span>
+                  <span id="badgeBatRec" class="hidden px-2 py-0.5 rounded-full text-[11px] font-bold bg-indigo-100 text-indigo-700">Python推奨</span>
+                </div>
+                <p id="optBatDesc" class="text-xs text-slate-500 mt-0.5">ダブルクリックで環境構築・起動ができるスクリプトを出力してもらいます。</p>
               </div>
             </label>
 
-            <!-- 壁打ちモード（仕様確認・質問） -->
-            <label class="flex items-start gap-3 p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition has-[:checked]:border-indigo-200 has-[:checked]:bg-indigo-50/30">
+            <!-- ディレクトリツリー -->
+            <label class="flex items-start gap-3 p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition has-[:checked]:border-indigo-200 has-[:checked]:bg-indigo-50/35">
+              <input type="checkbox" id="optTree" checked class="mt-0.5 w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500" />
+              <div class="flex-1">
+                <div class="text-sm font-semibold text-slate-800">ファイル構成・ディレクトリツリーを提示する</div>
+                <p class="text-xs text-slate-500 mt-0.5">どのフォルダに何のファイルを置けばよいか一目で分かるツリー図を出力させます。</p>
+              </div>
+            </label>
+
+            <!-- 相対パス -->
+            <label class="flex items-start gap-3 p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition has-[:checked]:border-indigo-200 has-[:checked]:bg-indigo-50/35">
+              <input type="checkbox" id="optRelativePath" checked class="mt-0.5 w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500" />
+              <div class="flex-1">
+                <div class="text-sm font-semibold text-slate-800">相対パスを使用（USBメモリなど保存場所を変えても動く設計）</div>
+                <p class="text-xs text-slate-500 mt-0.5">PC固有の絶対パスを使わず、フォルダごと別PCやUSBへ移動しても動くようにします。</p>
+              </div>
+            </label>
+
+            <!-- 初心者向け導入手順 -->
+            <label class="flex items-start gap-3 p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition has-[:checked]:border-indigo-200 has-[:checked]:bg-indigo-50/35">
+              <input type="checkbox" id="optSetupGuide" checked class="mt-0.5 w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500" />
+              <div class="flex-1">
+                <div class="text-sm font-semibold text-slate-800">ローカルサーバー起動や必要なダウンロード・導入手順を初心者向けに丁寧に説明する</div>
+                <p class="text-xs text-slate-500 mt-0.5">必要なツールやライブラリの入手先・起動手順をステップごとに解説してもらいます。</p>
+              </div>
+            </label>
+
+            <!-- 省略禁止 -->
+            <label class="flex items-start gap-3 p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition has-[:checked]:border-indigo-200 has-[:checked]:bg-indigo-50/35">
+              <input type="checkbox" id="optNoOmit" checked class="mt-0.5 w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500" />
+              <div class="flex-1">
+                <div class="text-sm font-semibold text-slate-800">省略禁止（そのままコピペして動くコード全文を出力する）</div>
+                <p class="text-xs text-slate-500 mt-0.5">「// 以下省略」などを防ぎ、そのまま貼り付けて動かせる完全なコードを出力させます。</p>
+              </div>
+            </label>
+
+            <!-- 壁打ちモード -->
+            <label class="flex items-start gap-3 p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition has-[:checked]:border-indigo-200 has-[:checked]:bg-indigo-50/35">
               <input type="checkbox" id="optClarifyFirst" class="mt-0.5 w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500" />
               <div class="flex-1">
                 <div class="flex flex-wrap items-center gap-2">
-                  <span class="text-sm font-semibold text-slate-800">いきなりコードを書かず、まず仕様確認・質問する（壁打ちモード）</span>
+                  <span class="text-sm font-semibold text-slate-800">いきなりコードを書かず、まず仕様の確認と不足情報の質問を行う（壁打ちモード）</span>
                   <span class="px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-100 text-amber-800">手戻り防止</span>
                 </div>
-                <p class="text-xs text-slate-500 mt-0.5">要件がまだ曖昧なときにONにすると、AIが先に不足情報を質問してくれます。</p>
-              </div>
-            </label>
-
-            <!-- 起動用・インストール用スクリプト生成 -->
-            <label class="flex items-start gap-3 p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition has-[:checked]:border-indigo-200 has-[:checked]:bg-indigo-50/30">
-              <input type="checkbox" id="optScript" class="mt-0.5 w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500" />
-              <div class="flex-1">
-                <div class="flex flex-wrap items-center gap-2">
-                  <span id="optScriptTitle" class="text-sm font-semibold text-slate-800">起動用・インストール用スクリプト（.bat等）も生成する</span>
-                  <span id="badgePythonRec" class="hidden px-2 py-0.5 rounded-full text-[11px] font-bold bg-indigo-100 text-indigo-700">Python推奨</span>
-                </div>
-                <p id="optScriptDesc" class="text-xs text-slate-500 mt-0.5">OSに合わせてダブルクリックで導入・起動できるスクリプトを作成してもらいます。</p>
-              </div>
-            </label>
-
-            <!-- ファイル構成ツリー -->
-            <label class="flex items-start gap-3 p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition has-[:checked]:border-indigo-200 has-[:checked]:bg-indigo-50/30">
-              <input type="checkbox" id="optTree" checked class="mt-0.5 w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500" />
-              <div class="flex-1">
-                <div class="text-sm font-semibold text-slate-800">ファイル構成・ディレクトリ構造をツリー形式で提示</div>
-                <p class="text-xs text-slate-500 mt-0.5">どのフォルダに何のファイルを保存すればよいか一目で分かります。</p>
-              </div>
-            </label>
-
-            <!-- ポータブル設計（相対パス） -->
-            <label class="flex items-start gap-3 p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition has-[:checked]:border-indigo-200 has-[:checked]:bg-indigo-50/30">
-              <input type="checkbox" id="optPortable" checked class="mt-0.5 w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500" />
-              <div class="flex-1">
-                <div class="text-sm font-semibold text-slate-800">ポータブル設計（相対パス使用・USBメモリ移動対応）</div>
-                <p class="text-xs text-slate-500 mt-0.5">保存場所の指定がない場合、フォルダごと別の場所やUSBに移しても動くようにします。</p>
-              </div>
-            </label>
-
-            <!-- 初学者向けの導入・環境構築手順 -->
-            <label class="flex items-start gap-3 p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition has-[:checked]:border-indigo-200 has-[:checked]:bg-indigo-50/30">
-              <input type="checkbox" id="optSetupGuide" checked class="mt-0.5 w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500" />
-              <div class="flex-1">
-                <div class="text-sm font-semibold text-slate-800">初学者向けの導入・環境構築手順を丁寧に説明してもらう</div>
-                <p class="text-xs text-slate-500 mt-0.5">ローカルサーバーの起動や必要なツール・ライブラリのダウンロード手順も解説します。</p>
+                <p class="text-xs text-slate-500 mt-0.5">要件がまだ曖昧なときにONにすると、AIが先に必要な質問をして整理してくれます。</p>
               </div>
             </label>
           </div>
 
           <!-- おすすめ機能の扱い -->
           <div class="pt-4 border-t border-slate-200">
-            <p class="text-sm font-semibold text-slate-800 mb-2">AIからの「おすすめ機能」の扱い</p>
+            <p class="text-sm font-semibold text-slate-800 mb-2">おすすめ機能の扱い</p>
             <div class="space-y-2">
               <label class="flex items-center gap-2.5 p-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition has-[:checked]:border-indigo-500 has-[:checked]:bg-indigo-50/40">
-                <input type="radio" name="recommendMode" value="suggest" checked class="text-indigo-600 focus:ring-indigo-500" />
-                <span class="text-sm text-slate-700">提案だけしてほしい（実装せず、最後にリストアップ）</span>
-              </label>
-
-              <label class="flex items-center gap-2.5 p-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition has-[:checked]:border-indigo-500 has-[:checked]:bg-indigo-50/40">
                 <input type="radio" name="recommendMode" value="include" class="text-indigo-600 focus:ring-indigo-500" />
-                <span class="text-sm text-slate-700">おすすめ機能も自動で追加・実装してほしい</span>
+                <span class="text-sm text-slate-700">おすすめ機能があれば積極的に提案・追加してほしい</span>
               </label>
 
               <label class="flex items-center gap-2.5 p-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition has-[:checked]:border-indigo-500 has-[:checked]:bg-indigo-50/40">
-                <input type="radio" name="recommendMode" value="none" class="text-indigo-600 focus:ring-indigo-500" />
-                <span class="text-sm text-slate-700">余計な機能は追加も提案もしないでほしい</span>
+                <input type="radio" name="recommendMode" value="none" checked class="text-indigo-600 focus:ring-indigo-500" />
+                <span class="text-sm text-slate-700">まずは依頼した機能だけシンプルに作ってほしい</span>
+              </label>
+
+              <label class="flex items-center gap-2.5 p-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition has-[:checked]:border-indigo-500 has-[:checked]:bg-indigo-50/40">
+                <input type="radio" name="recommendMode" value="suggest" class="text-indigo-600 focus:ring-indigo-500" />
+                <span class="text-sm text-slate-700">コードには入れず、最後に提案だけ箇条書きにしてほしい</span>
               </label>
             </div>
           </div>
@@ -691,49 +622,54 @@
 
       </div>
 
-      <!-- ==================== 右カラム：リアルタイムプレビュー＆アクション ==================== -->
+      <!-- ==================== 右カラム：リアルタイムプレビュー ==================== -->
       <div class="lg:col-span-5 lg:sticky lg:top-20 space-y-4">
         <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
           <!-- プレビューヘッダー -->
-          <div class="px-4 sm:px-5 py-3.5 bg-slate-900 text-white flex items-center justify-between gap-2">
+          <div class="px-4 sm:px-5 py-3.5 bg-slate-900 text-white flex flex-wrap items-center justify-between gap-2">
             <div class="flex items-center gap-2">
-              <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <svg class="w-5 h-5 text-indigo-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
               </svg>
               <h2 class="text-sm font-bold tracking-wide">リアルタイムプレビュー</h2>
             </div>
-            <span id="charCountBadge" class="text-xs font-mono bg-slate-800 text-slate-300 px-2.5 py-1 rounded-full">
-              0 文字
-            </span>
+            <div class="flex items-center gap-2">
+              <span id="llmBadge" class="text-[11px] font-semibold bg-indigo-500/25 text-indigo-200 border border-indigo-400/30 px-2.5 py-0.5 rounded-full">
+                汎用型
+              </span>
+              <span id="charCountBadge" class="text-xs font-mono bg-slate-800 text-slate-300 px-2.5 py-0.5 rounded-full">
+                0 文字
+              </span>
+            </div>
           </div>
 
-          <!-- 必須項目インジケーター -->
+          <!-- 入力ステータスバナー（入力をブロックせず優しくガイド） -->
           <div id="statusReadyBanner" class="hidden px-4 py-2.5 bg-emerald-50 border-b border-emerald-200 text-emerald-800 flex items-center gap-2 text-xs font-semibold">
             <svg class="w-4 h-4 text-emerald-600 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <span>必須項目がすべて入力されました！このままコピーしてAIに送れます。</span>
+            <span>必須項目が揃いました！このままコピーしてAIに送信できます。</span>
           </div>
 
-          <div id="missingWarning" class="hidden px-4 py-2.5 bg-amber-50 border-b border-amber-200 text-amber-900">
+          <div id="statusMissingBanner" class="hidden px-4 py-2.5 bg-amber-50 border-b border-amber-200 text-amber-900">
             <div class="flex items-start gap-2">
               <svg class="w-4 h-4 text-amber-600 mt-0.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
               </svg>
               <div class="text-xs leading-relaxed">
-                <span class="font-bold">あと少し！未入力の必須項目：</span>
+                <span class="font-bold">未入力の必須項目：</span>
                 <span id="missingFieldsText" class="text-amber-800"></span>
               </div>
             </div>
           </div>
 
-          <!-- プレビューテキストエリア -->
+          <!-- プレビューテキストエリア（手動微調整も可能） -->
           <div class="p-4 bg-slate-50/70">
             <textarea
               id="promptPreview"
-              readonly
               rows="20"
               class="w-full h-[380px] lg:h-[calc(100vh-330px)] min-h-[280px] rounded-xl border border-slate-200 bg-white p-3.5 text-xs sm:text-sm font-mono text-slate-800 leading-relaxed focus:outline-none focus:ring-2 focus:ring-indigo-200 custom-scrollbar resize-y"
+              placeholder="左側のフォームを入力すると、ここにプロンプトが自動生成されます..."
             ></textarea>
           </div>
 
@@ -761,11 +697,11 @@
               <svg class="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
               </svg>
-              <span>プロンプトを .txt でダウンロード</span>
+              <span>.txt で保存</span>
             </button>
 
             <p class="text-[11px] text-center text-slate-500">
-              コピーしたら ChatGPT / Claude / Gemini の入力欄に貼り付けて送信してください
+              プレビュー欄はコピー前に直接編集して微調整することもできます
             </p>
           </div>
         </div>
@@ -777,11 +713,11 @@
   <!-- ==================== フッター ==================== -->
   <footer class="border-t border-slate-200 bg-white mt-10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center text-xs text-slate-500">
-      プログラミング依頼用 プロンプトジェネレーター — すべての処理はブラウザ内で完結し、入力データやコードが外部に送信されることはありません。
+      プロンプトジェネレーター（プログラミング依頼用）— すべての処理はブラウザ内で完結し、入力内容やソースコードが外部サーバーへ送信されることはありません。
     </div>
   </footer>
 
-  <!-- ==================== 全リセット確認モーダル ==================== -->
+  <!-- ==================== リセット確認モーダル ==================== -->
   <div id="resetModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/50 backdrop-blur-xs p-4">
     <div class="bg-white rounded-2xl shadow-xl max-w-md w-full p-6 space-y-4">
       <div class="flex items-center gap-3">
@@ -792,7 +728,7 @@
         </div>
         <div>
           <h3 class="text-base font-bold text-slate-900">入力内容をすべてリセットしますか？</h3>
-          <p class="text-xs text-slate-500 mt-0.5">入力したテキストや読み込んだコードファイルがすべて初期状態に戻ります。</p>
+          <p class="text-xs text-slate-500 mt-0.5">入力した内容や読み込んだコードファイルがすべて初期状態に戻ります。</p>
         </div>
       </div>
       <div class="flex items-center justify-end gap-2.5 pt-2">
@@ -814,277 +750,217 @@
     </div>
   </div>
 
-  <!-- ==================== トースト通知エリア ==================== -->
+  <!-- ==================== トースト通知コンテナ ==================== -->
   <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
-  <!-- ==================== アプリケーションロジック (Vanilla JS) ==================== -->
+  <!-- ==================== アプリケーションロジック ==================== -->
   <script>
     (function () {
       'use strict';
 
-      // ============================================================
-      // 1. 初期状態 & サンプルデータ定義
-      // ============================================================
+      // コードブロック用の3連バッククォート定数（テンプレートリテラル衝突を完全に防止）
+      const FENCE = '```';
+
+      // ラベル定義マップ
+      const LLM_LABELS = {
+        general: '汎用型（指定なし）',
+        chatgpt: 'ChatGPT 最適化',
+        claude: 'Claude（XML構造）',
+        gemini: 'Gemini 最適化',
+      };
+
+      const LLM_HINTS = {
+        general: 'どのAIでも読みやすい標準的なMarkdown構造で出力します。',
+        chatgpt: '役割・要件・制約を整理し、ファイル名を明記した出力形式に整えます。',
+        claude: 'Claudeが得意なXMLタグ構造（<role>等）で高精度に出力させます。',
+        gemini: '構成→コード全文→実行手順の階層フォーマットで整理して出力させます。',
+      };
+
+      const LANGUAGE_LABELS = {
+        auto: 'わからない（AIにおまかせ・初心者向け提案）',
+        python_embed_web: 'Python (python_embed) + ブラウザUI (HTML/Canvas) [USBポータブル構成]',
+        python_embed_ffmpeg: 'Python (python_embed) + FFmpeg + ブラウザUI (HTML/Canvas) [USB完結・動画/音声処理]',
+        python: 'Python（通常）',
+        html_js: 'HTML / CSS / JavaScript（単一ファイル・ブラウザ完結）',
+        nodejs: 'JavaScript / Node.js',
+        react: 'TypeScript / React',
+        csharp: 'C# / Unity',
+        arduino: 'C++ / Arduino',
+        other: 'その他',
+      };
+
+      const OS_LABELS = {
+        windows: 'Windows',
+        mac: 'Mac',
+        browser: 'どちらでも（Webブラウザ）',
+        any: '指定なし',
+      };
+
+      const UI_STYLE_LABELS = {
+        gui: 'ボタンのある画面（GUI / ブラウザUI）',
+        cui: '黒い画面（CUI / コンソール）',
+        auto: 'AIにおまかせ',
+      };
+
       const NEW_BULLET_PLACEHOLDERS = [
-        '例：フォルダ選択ボタンから対象フォルダを選べるようにする',
-        '例：処理が完了したら完了メッセージを表示する',
-        '例：エラーが起きたときは日本語で分かりやすく案内する',
-        '例：設定値（幅やファイル名の接頭辞など）を画面で変更できるようにする',
+        '例：フォルダ選択ボタンから対象ファイルを選べるようにする',
+        '例：処理の進捗と完了メッセージを分かりやすく表示する',
+        '例：エラーが起きたときは日本語で原因と対処法を案内する',
+        '例：設定値を画面上から簡単に変更できるようにする',
       ];
 
-      const MOD_BULLET_PLACEHOLDERS = [
-        '例：ボタンを押したときに正しく計算処理が動くように修正してほしい',
-        '例：入力欄が空のまま押されたときは注意メッセージを出すように追加してほしい',
-        '例：修正した箇所がどこかも簡単に説明してほしい',
+      const FIX_BULLET_PLACEHOLDERS = [
+        '例：エラーの原因を特定して正常に動くように修正してほしい',
+        '例：存在しないファイルが指定されたときに分かりやすいエラーメッセージを出してほしい',
+        '例：修正した箇所と理由を初心者向けに簡単に解説してほしい',
       ];
 
+      // ============================================================
+      // 1. 状態管理 & サンプル定義
+      // ============================================================
       function createDefaultState() {
         return {
-          mode: 'new', // 'new' | 'modify'
+          mode: 'new', // 'new' | 'fix'
+          fixContext: 'continue', // 'continue' | 'new'
           llm: 'general', // 'general' | 'chatgpt' | 'claude' | 'gemini'
-          language: 'auto', // 'auto' | 'Python' | ... | 'other'
+          language: 'auto',
           otherLang: '',
-          os: 'Windows', // 'Windows' | 'Mac' | 'どちらでも（Webブラウザ）' | '指定なし'
-          uiType: 'AIにおまかせ',
+          os: 'windows', // 'windows' | 'mac' | 'browser' | 'any'
+          uiStyle: 'gui', // 'gui' | 'cui' | 'auto'
 
-          // 新規作成モード
-          newPurpose: '',
+          // 新規作成モードの必須質問
+          newGoal: '',
           newScene: '',
           newIo: '',
-          newBullets: ['', '', ''],
-          newNotes: '',
 
-          // 修正・機能追加モード
-          chatState: 'continue', // 'continue' | 'new_chat'
+          // 修正モードの必須質問
+          fixCurrent: '',
+          fixExpected: '',
+          fixErrorMsg: '',
+
+          // 修正モード（新しいチャット）のコード共有
           uploadedFiles: [], // [{ name: string, content: string }]
-          attachDirect: false,
           pastedCode: '',
-          modCurrentState: '',
-          modExpectedState: '',
-          modErrorMessage: '',
-          modBullets: ['', '', ''],
+          attachNotice: false,
+
+          // 動的箇条書き（モード別に保持）
+          newBullets: ['', '', ''],
+          fixBullets: ['', '', ''],
 
           // 出力・サポートオプション
+          optBat: false,
+          optTree: true,
+          optRelativePath: true,
+          optSetupGuide: true,
           optNoOmit: true,
           optClarifyFirst: false,
-          optScript: false,
-          optTree: true,
-          optPortable: true,
-          optSetupGuide: true,
-          recommendMode: 'suggest', // 'suggest' | 'include' | 'none'
+          recommendMode: 'none', // 'include' | 'none' | 'suggest'
         };
       }
 
-      const SAMPLES = {
-        usb_video_editor: {
-          label: '例1：USB完結・動画カット＆音声追加（python_embed＋FFmpeg）',
+      const SAMPLE_PRESETS = {
+        usb_video_ffmpeg: {
+          title: '例1：USB完結・動画カット＆音声追加（python_embed＋FFmpeg）',
           data: {
             mode: 'new',
+            fixContext: 'continue',
             llm: 'general',
-            language: 'python_embed_ffmpeg_ui',
+            language: 'python_embed_ffmpeg',
             otherLang: '',
-            os: 'Windows',
-            uiType: 'ブラウザUI（ローカルサーバー＋HTML/Canvas）',
-            newPurpose: 'USBメモリに入れたままWindows PCで動く、シンプルな動画カット＆BGM追加ツールを作りたい。',
-            newScene: '動画編集ソフトを入れられない学校や職場のWindows PCで、USBメモリを挿してブラウザ画面から手軽に短い動画を編集したい。',
-            newIo: 'MP4動画とBGM用のMP3音声を読み込み、ブラウザ上で開始〜終了時間とBGM音量を指定すると、カット＋音声合成されたMP4動画がプロジェクト内のoutputフォルダに書き出される。',
+            os: 'windows',
+            uiStyle: 'gui',
+            newGoal: 'USBメモリに入れたままWindows PCで動く、シンプルな動画カット＆BGM音声追加ツールを作りたい。',
+            newScene: 'ソフトを自由にインストールできない学校や職場のWindows PCで、USBメモリを挿してブラウザ画面から手軽に動画を編集したい。',
+            newIo: 'MP4動画とBGM用のMP3/WAV音声を選択し、ブラウザ上で開始〜終了時間と音量を指定すると、カット＆音声合成されたMP4動画がプロジェクト内のoutputフォルダに書き出される。',
             newBullets: [
-              'ブラウザ上で動画をプレビュー再生し、スライダーまたは秒数入力で「開始位置」と「終了位置」を指定できる',
-              'BGM音声ファイル（MP3/WAV）を追加し、元動画の音量とBGMの音量をそれぞれ調整できる',
-              '「書き出し実行」ボタンを押すと進捗状況が表示され、完了後に保存先ファイル名とダウンロードリンクを表示する',
-              '作業中の一時ファイルや出力動画はすべてUSB内のプロジェクトフォルダに保存し、PC本体にゴミを残さない',
+              'ブラウザ画面（HTML/Canvas）上で動画をプレビュー再生し、スライダーまたは秒数入力で「開始位置」と「終了位置」を指定できる',
+              'BGM用の音声ファイルを追加し、元動画の音量とBGMの音量をそれぞれ調整できる',
+              '「書き出し実行」ボタンを押すと処理中インジケーターを表示し、完了後に保存先ファイル名とダウンロードリンクを表示する',
+              '一時ファイルや出力動画はすべてUSB内のプロジェクトフォルダに保存し、PC本体にファイルを残さない',
             ],
-            newNotes: '専門用語を避けた日本語UIにして、PCにPythonやFFmpegが入っていなくてもUSB内だけで完結するようにしたいです。',
+            optBat: true,
+            optTree: true,
+            optRelativePath: true,
+            optSetupGuide: true,
             optNoOmit: true,
             optClarifyFirst: false,
-            optScript: true,
-            optTree: true,
-            optPortable: true,
-            optSetupGuide: true,
             recommendMode: 'suggest',
           },
         },
-        python_resize: {
-          label: '例2：画像リサイズ・一括リネーム（Python）',
+        auto_timer: {
+          title: '例2：言語おまかせ・学習タイマー',
           data: {
             mode: 'new',
-            llm: 'general',
-            language: 'Python',
-            otherLang: '',
-            os: 'Windows',
-            uiType: 'ボタンのある画面（GUIアプリ）',
-            newPurpose: 'フォルダ内にある複数の写真を、まとめて縮小して分かりやすい連番ファイル名に変換するツールを作りたい。',
-            newScene: 'ブログや資料作成の前に、スマホで撮った大量の写真を自分のWindows PCで一括整理したい。',
-            newIo: '画像が入ったフォルダを選ぶと、幅800px（縦横比は維持）に縮小し、「photo_001.jpg」のような連番名にして別フォルダ（output）に保存される。',
-            newBullets: [
-              '画面から元の画像フォルダをボタンで選択できるようにする',
-              '縮小後の幅（初期値800px）とファイル名の頭文字（初期値photo_）を画面で変更できるようにする',
-              'JPGとPNG画像に対応し、元の画像は上書きせず別フォルダに保存する',
-              '処理が終わったら「〇枚の変換が完了しました」とメッセージを表示する',
-            ],
-            newNotes: '初心者でも使いやすいように、ボタンや文字は日本語で大きめにしてほしいです。',
-            optNoOmit: true,
-            optClarifyFirst: false,
-            optScript: true,
-            optTree: true,
-            optPortable: true,
-            optSetupGuide: true,
-            recommendMode: 'suggest',
-          },
-        },
-        pomodoro_auto: {
-          label: '例3：学習用タイマーアプリ（言語おまかせ）',
-          data: {
-            mode: 'new',
+            fixContext: 'continue',
             llm: 'general',
             language: 'auto',
             otherLang: '',
-            os: 'どちらでも（Webブラウザ）',
-            uiType: 'Webページ（HTML単体）',
-            newPurpose: '勉強や作業に集中するためのシンプルなポモドーロタイマー（25分作業＋5分休憩）を作りたい。',
-            newScene: '自宅のパソコンやタブレットで資格勉強をするときに、画面の端に置いて使いたい。',
-            newIo: 'スタートボタンを押すと25分のカウントダウンが始まり、0になったら音と画面表示で知らせて5分休憩に切り替わる。',
+            os: 'any',
+            uiStyle: 'gui',
+            newGoal: '勉強や作業に集中するためのシンプルなポモドーロ学習タイマー（25分作業＋5分休憩）を作りたい。',
+            newScene: '自宅のパソコンやタブレットで資格勉強をするときに、画面の隅に置いて毎日の学習時間を記録したい。',
+            newIo: 'スタートボタンを押すとカウントダウンが始まり、0になったら音と画面表示で知らせて休憩タイマーへ切り替わり、今日の完了セット数がカウントアップされる。',
             newBullets: [
-              '「スタート」「一時停止」「リセット」の3つのボタンを用意する',
-              '作業時間（初期25分）と休憩時間（初期5分）を自分で変更できるようにする',
-              '時間が0になったときにやさしい通知音が鳴るようにする',
-              '今日完了したセット数を画面に表示してモチベーションが上がるようにする',
+              '「スタート」「一時停止」「リセット」の3つの大きなボタンを配置する',
+              '作業時間（初期25分）と休憩時間（初期5分）を画面上から自由に変更できるようにする',
+              'タイマー終了時にやさしい通知音が鳴り、視覚的にも分かりやすく通知する',
+              '今日完了したセット数と合計学習時間を画面に表示する',
             ],
-            newNotes: 'インストール不要で、ファイルを開くだけですぐ使える形だと嬉しいです。落ち着いたパステル調のデザイン希望。',
+            optBat: false,
+            optTree: true,
+            optRelativePath: true,
+            optSetupGuide: true,
             optNoOmit: true,
             optClarifyFirst: false,
-            optScript: false,
-            optTree: true,
-            optPortable: true,
-            optSetupGuide: true,
-            recommendMode: 'suggest',
+            recommendMode: 'none',
           },
         },
-        bugfix_button: {
-          label: '例4：ボタンが動かないエラー修正（修正モード）',
+        fix_error_newchat: {
+          title: '例3：エラー修正依頼（新しいチャット）',
           data: {
-            mode: 'modify',
+            mode: 'fix',
+            fixContext: 'new',
             llm: 'general',
-            language: 'HTML / CSS / JavaScript（単一ファイル・Webアプリ）',
+            language: 'python',
             otherLang: '',
-            os: 'どちらでも（Webブラウザ）',
-            uiType: 'Webページ（HTML単体）',
-            optClarifyFirst: false,
-            optScript: false,
-            optTree: false,
-            optPortable: true,
+            os: 'windows',
+            uiStyle: 'cui',
+            fixCurrent: 'CSVファイルを読み込んで売上合計を計算するPythonスクリプトを実行すると、起動直後にFileNotFoundErrorで止まってしまう。',
+            fixExpected: '別のフォルダやUSBメモリから実行しても、スクリプトと同じ場所にある「data/sales.csv」を正しく読み込んで合計金額を表示してほしい。',
+            fixErrorMsg: 'Traceback (most recent call last):\n  File "E:\\\\my_app\\\\calc_sales.py", line 5, in <module>\n    df = pd.read_csv("data/sales.csv")\nFileNotFoundError: [Errno 2] No such file or directory: \'data/sales.csv\'',
+            pastedCode: 'import pandas as pd\n\n# 売上CSVを読み込んで合計を計算\ndf = pd.read_csv("data/sales.csv")\ntotal = df["price"].sum()\nprint("合計金額:", total)\n',
+            attachNotice: false,
+            fixBullets: [
+              '実行時のカレントディレクトリに左右されないよう、スクリプト自身の場所を基準にした相対パスで読み込むように修正してほしい',
+              'CSVファイルが見つからない場合やpandasが未導入の場合に、初心者にも分かる日本語メッセージを表示してほしい',
+              '修正した箇所と、なぜこのエラーが起きたのかを簡単に説明してほしい',
+            ],
+            optBat: true,
+            optTree: true,
+            optRelativePath: true,
             optSetupGuide: true,
-            recommendMode: 'suggest',
+            optNoOmit: true,
+            optClarifyFirst: false,
+            recommendMode: 'none',
           },
         },
       };
 
       let state = createDefaultState();
+      let el = {};
 
       // ============================================================
-      // 2. DOM要素の参照
+      // 2. ユーティリティ関数
       // ============================================================
-      const el = {
-        tabModeNew: document.getElementById('tabModeNew'),
-        tabModeModify: document.getElementById('tabModeModify'),
+      function isPortableEmbed(lang) {
+        return lang === 'python_embed_web' || lang === 'python_embed_ffmpeg';
+      }
 
-        selectLlm: document.getElementById('selectLlm'),
-        llmHint: document.getElementById('llmHint'),
-        selectLanguage: document.getElementById('selectLanguage'),
-        langHint: document.getElementById('langHint'),
-        otherLangContainer: document.getElementById('otherLangContainer'),
-        inputOtherLang: document.getElementById('inputOtherLang'),
-        selectOs: document.getElementById('selectOs'),
-        badgeWinRec: document.getElementById('badgeWinRec'),
-        selectUiType: document.getElementById('selectUiType'),
-        portableInfoBanner: document.getElementById('portableInfoBanner'),
-        portableInfoTitle: document.getElementById('portableInfoTitle'),
-        portableInfoDesc: document.getElementById('portableInfoDesc'),
-
-        // 新規作成モード
-        sectionNewMode: document.getElementById('sectionNewMode'),
-        newPurpose: document.getElementById('newPurpose'),
-        newScene: document.getElementById('newScene'),
-        newIo: document.getElementById('newIo'),
-        newBulletList: document.getElementById('newBulletList'),
-        btnAddNewBullet: document.getElementById('btnAddNewBullet'),
-        newNotes: document.getElementById('newNotes'),
-
-        // 修正モード
-        sectionModifyMode: document.getElementById('sectionModifyMode'),
-        cardChatContinue: document.getElementById('cardChatContinue'),
-        cardChatNew: document.getElementById('cardChatNew'),
-        newChatCodePanel: document.getElementById('newChatCodePanel'),
-        chkAttachDirect: document.getElementById('chkAttachDirect'),
-        codeEmbedInputs: document.getElementById('codeEmbedInputs'),
-        dropZone: document.getElementById('dropZone'),
-        codeFileInput: document.getElementById('codeFileInput'),
-        uploadedFileList: document.getElementById('uploadedFileList'),
-        uploadedFileItems: document.getElementById('uploadedFileItems'),
-        btnClearFiles: document.getElementById('btnClearFiles'),
-        pastedCode: document.getElementById('pastedCode'),
-        modCurrentState: document.getElementById('modCurrentState'),
-        modExpectedState: document.getElementById('modExpectedState'),
-        modErrorMessage: document.getElementById('modErrorMessage'),
-        modBulletList: document.getElementById('modBulletList'),
-        btnAddModBullet: document.getElementById('btnAddModBullet'),
-
-        // オプション
-        optNoOmit: document.getElementById('optNoOmit'),
-        optClarifyFirst: document.getElementById('optClarifyFirst'),
-        optScript: document.getElementById('optScript'),
-        optScriptTitle: document.getElementById('optScriptTitle'),
-        optScriptDesc: document.getElementById('optScriptDesc'),
-        badgePythonRec: document.getElementById('badgePythonRec'),
-        optTree: document.getElementById('optTree'),
-        optPortable: document.getElementById('optPortable'),
-        optSetupGuide: document.getElementById('optSetupGuide'),
-
-        // プレビュー＆アクション
-        promptPreview: document.getElementById('promptPreview'),
-        charCountBadge: document.getElementById('charCountBadge'),
-        statusReadyBanner: document.getElementById('statusReadyBanner'),
-        missingWarning: document.getElementById('missingWarning'),
-        missingFieldsText: document.getElementById('missingFieldsText'),
-        btnCopyPrompt: document.getElementById('btnCopyPrompt'),
-        iconCopyDefault: document.getElementById('iconCopyDefault'),
-        iconCopyDone: document.getElementById('iconCopyDone'),
-        copyBtnText: document.getElementById('copyBtnText'),
-        btnDownloadTxt: document.getElementById('btnDownloadTxt'),
-
-        // ヘッダー・モーダル・トースト
-        btnSaveJson: document.getElementById('btnSaveJson'),
-        inputLoadJson: document.getElementById('inputLoadJson'),
-        btnReset: document.getElementById('btnReset'),
-        resetModal: document.getElementById('resetModal'),
-        btnCancelReset: document.getElementById('btnCancelReset'),
-        btnConfirmReset: document.getElementById('btnConfirmReset'),
-        toastContainer: document.getElementById('toastContainer'),
-      };
-
-      // ============================================================
-      // 3. ユーティリティ関数
-      // ============================================================
-      function showToast(message, type = 'info') {
-        const toast = document.createElement('div');
-        const colorClasses =
-          type === 'success'
-            ? 'bg-emerald-600 text-white'
-            : type === 'warning'
-            ? 'bg-amber-600 text-white'
-            : type === 'error'
-            ? 'bg-rose-600 text-white'
-            : 'bg-slate-800 text-white';
-
-        toast.className = `toast-animate pointer-events-auto px-4 py-2.5 rounded-xl shadow-lg text-xs sm:text-sm font-medium max-w-sm ${colorClasses}`;
-        toast.textContent = message;
-        el.toastContainer.appendChild(toast);
-
-        setTimeout(() => {
-          toast.style.opacity = '0';
-          toast.style.transition = 'opacity 0.25s ease';
-          setTimeout(() => toast.remove(), 260);
-        }, 3000);
+      function getEffectiveLanguageLabel() {
+        if (state.language === 'other') {
+          return state.otherLang.trim() || '（未入力の言語）';
+        }
+        return LANGUAGE_LABELS[state.language] || state.language;
       }
 
       function escapeHtml(str) {
@@ -1096,9 +972,9 @@
           .replace(/'/g, '&#39;');
       }
 
-      function getFenceLangFromFilename(filename) {
+      function getFenceLang(filename) {
         const ext = (filename.split('.').pop() || '').toLowerCase();
-        const map = {
+        const extMap = {
           py: 'python',
           js: 'javascript',
           ts: 'typescript',
@@ -1117,349 +993,363 @@
           h: 'cpp',
           bat: 'bat',
           sh: 'bash',
-      function isPortableEmbedLang(langValue) {
-        return langValue === 'python_embed_ui' || langValue === 'python_embed_ffmpeg_ui';
-      }
-
-      function getEffectiveLanguage() {
-        if (state.language === 'auto') {
-          return 'わからない（AIにおまかせ）';
-        }
-        if (state.language === 'python_embed_ui') {
-          return 'Python (python_embed) + ブラウザUI (HTML/Canvas) ※USB完結ポータブル構成';
-        }
-        if (state.language === 'python_embed_ffmpeg_ui') {
-          return 'Python (python_embed) + FFmpeg + ブラウザUI (HTML/Canvas) ※USB完結・動画/音声処理構成';
-        }
-        if (state.language === 'other') {
-          return state.otherLang.trim() || '（未入力の言語）';
-        }
-        return state.language;
-      }
-
-      function copyTextToClipboard(text) {
-        try {
-          const tempTextarea = document.createElement('textarea');
-          tempTextarea.value = text;
-          tempTextarea.setAttribute('readonly', '');
-          tempTextarea.style.position = 'fixed';
-          tempTextarea.style.top = '-9999px';
-          tempTextarea.style.left = '-9999px';
-          document.body.appendChild(tempTextarea);
-          tempTextarea.select();
-          tempTextarea.setSelectionRange(0, text.length);
-          const success = document.execCommand('copy');
-          document.body.removeChild(tempTextarea);
-          return success;
-        } catch (err) {
-          console.error('Copy failed:', err);
-          return false;
-        }
+          command: 'bash',
+          xml: 'xml',
+          yaml: 'yaml',
+          yml: 'yaml',
+          sql: 'sql',
+          md: 'markdown',
+        };
+        return extMap[ext] || '';
       }
 
       function getTimestampString() {
         const now = new Date();
-        const pad = (n) => String(n).padStart(2, '0');
-        return `${now.getFullYear()}${pad(now.getMonth() + 1)}${pad(now.getDate())}-${pad(now.getHours())}${pad(now.getMinutes())}`;
+        const pad = function (n) {
+          return String(n).padStart(2, '0');
+        };
+        return (
+          now.getFullYear() +
+          pad(now.getMonth() + 1) +
+          pad(now.getDate()) +
+          '-' +
+          pad(now.getHours()) +
+          pad(now.getMinutes())
+        );
+      }
+
+      function showToast(message, type) {
+        const toast = document.createElement('div');
+        let bgClass = 'bg-slate-800 text-white';
+        if (type === 'success') bgClass = 'bg-emerald-600 text-white';
+        else if (type === 'warning') bgClass = 'bg-amber-600 text-white';
+        else if (type === 'error') bgClass = 'bg-rose-600 text-white';
+
+        toast.className = 'toast-animate pointer-events-auto px-4 py-2.5 rounded-xl shadow-lg text-xs sm:text-sm font-medium max-w-sm ' + bgClass;
+        toast.textContent = message;
+        el.toastContainer.appendChild(toast);
+
+        setTimeout(function () {
+          toast.style.opacity = '0';
+          toast.style.transition = 'opacity 0.25s ease';
+          setTimeout(function () {
+            if (toast.parentNode) toast.parentNode.removeChild(toast);
+          }, 260);
+        }, 3000);
+      }
+
+      function copyToClipboard(text) {
+        try {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.setAttribute('readonly', '');
+          ta.style.position = 'fixed';
+          ta.style.top = '-9999px';
+          ta.style.left = '-9999px';
+          document.body.appendChild(ta);
+          ta.select();
+          ta.setSelectionRange(0, text.length);
+          const ok = document.execCommand('copy');
+          document.body.removeChild(ta);
+          return ok;
+        } catch (err) {
+          console.error('Clipboard copy error:', err);
+          return false;
+        }
       }
 
       // ============================================================
-      // 4. UI更新・レンダリング関数
+      // 3. UI レンダリング & 同期関数
       // ============================================================
-      function updateModeUI() {
+      function updateModeAndContextUI() {
         const isNew = state.mode === 'new';
 
+        // タブのスタイル
         if (isNew) {
           el.tabModeNew.className = 'py-2.5 px-3 rounded-lg text-sm font-bold transition flex items-center justify-center gap-2 bg-white text-indigo-700 shadow-xs cursor-pointer';
-          el.tabModeModify.className = 'py-2.5 px-3 rounded-lg text-sm font-bold transition flex items-center justify-center gap-2 text-slate-600 hover:text-slate-900 cursor-pointer';
+          el.tabModeFix.className = 'py-2.5 px-3 rounded-lg text-sm font-bold transition flex items-center justify-center gap-2 text-slate-600 hover:text-slate-900 cursor-pointer';
         } else {
-          el.tabModeModify.className = 'py-2.5 px-3 rounded-lg text-sm font-bold transition flex items-center justify-center gap-2 bg-white text-indigo-700 shadow-xs cursor-pointer';
+          el.tabModeFix.className = 'py-2.5 px-3 rounded-lg text-sm font-bold transition flex items-center justify-center gap-2 bg-white text-indigo-700 shadow-xs cursor-pointer';
           el.tabModeNew.className = 'py-2.5 px-3 rounded-lg text-sm font-bold transition flex items-center justify-center gap-2 text-slate-600 hover:text-slate-900 cursor-pointer';
         }
         el.tabModeNew.setAttribute('aria-selected', String(isNew));
-        el.tabModeModify.setAttribute('aria-selected', String(!isNew));
+        el.tabModeFix.setAttribute('aria-selected', String(!isNew));
 
-        el.sectionNewMode.classList.toggle('hidden', !isNew);
-        el.sectionModifyMode.classList.toggle('hidden', isNew);
-        updateChatStateUI();
+        // 修正モード専用セクションの表示切替
+        el.fixContextSection.classList.toggle('hidden', isNew);
+        el.newRequiredFields.classList.toggle('hidden', !isNew);
+        el.fixRequiredFields.classList.toggle('hidden', isNew);
+
+        // セクション見出しの切替
+        el.requiredSectionTitle.textContent = isNew
+          ? '必須質問・初学者ガイド（作りたいものの基本）'
+          : '必須質問・初学者ガイド（現状と期待の整理）';
+        el.requiredSectionSub.textContent = isNew
+          ? 'まずはこの3つを埋めるだけで、AIが意図を正確に理解してコードを書けるようになります。'
+          : '「現状」「期待」「エラーメッセージ」を分けて書くと、AIの修正精度が大きく上がります。';
+        el.bulletSectionTitle.textContent = isNew
+          ? 'やりたいこと・機能（箇条書き）'
+          : '修正・追加したい点（箇条書き）';
+
+        // 修正サブオプションのスタイルと表示
+        const isNewChat = state.fixContext === 'new';
+        el.cardFixContinue.classList.toggle('border-indigo-600', !isNewChat);
+        el.cardFixContinue.classList.toggle('bg-indigo-50/50', !isNewChat);
+        el.cardFixContinue.classList.toggle('border-slate-200', isNewChat);
+        el.cardFixContinue.classList.toggle('bg-white', isNewChat);
+
+        el.cardFixNew.classList.toggle('border-indigo-600', isNewChat);
+        el.cardFixNew.classList.toggle('bg-indigo-50/50', isNewChat);
+        el.cardFixNew.classList.toggle('border-slate-200', !isNewChat);
+        el.cardFixNew.classList.toggle('bg-white', !isNewChat);
+
+        el.fixNewChatCodeBox.classList.toggle('hidden', isNew || !isNewChat);
       }
 
-      function updateChatStateUI() {
-        const isNewChat = state.chatState === 'new_chat';
+      function updateSettingsHintsUI() {
+        el.llmHint.textContent = LLM_HINTS[state.llm] || LLM_HINTS.general;
+        el.llmBadge.textContent = LLM_LABELS[state.llm] || '汎用型';
 
-        el.cardChatContinue.classList.toggle('border-indigo-600', !isNewChat);
-        el.cardChatContinue.classList.toggle('bg-indigo-50/50', !isNewChat);
-        el.cardChatContinue.classList.toggle('border-slate-200', isNewChat);
-        el.cardChatContinue.classList.toggle('bg-white', isNewChat);
-
-        el.cardChatNew.classList.toggle('border-indigo-600', isNewChat);
-        el.cardChatNew.classList.toggle('bg-indigo-50/50', isNewChat);
-        el.cardChatNew.classList.toggle('border-slate-200', !isNewChat);
-        el.cardChatNew.classList.toggle('bg-white', !isNewChat);
-
-        el.newChatCodePanel.classList.toggle('hidden', !isNewChat);
-
-        // 直接添付がONなら埋め込み入力欄を薄くする
-        el.codeEmbedInputs.classList.toggle('opacity-45', state.attachDirect);
-        el.codeEmbedInputs.classList.toggle('pointer-events-none', state.attachDirect);
-      }
-
-      function updateLlmHint() {
-        const hints = {
-          general: 'どのAIでも読みやすい標準的なMarkdown構造で出力します。',
-          chatgpt: '役割・要件・制約を整理し、初心者向けの解説付きで出力させます。',
-          claude: 'Claudeが得意なXMLタグ構造（<role>等）で高精度に出力させます。',
-          gemini: '構成→コード→手順の階層フォーマットで見やすく出力させます。',
-        };
-        el.llmHint.textContent = hints[state.llm] || hints.general;
-      }
-
-      function updateLanguageAndOsUI() {
         const isOther = state.language === 'other';
         const isAuto = state.language === 'auto';
-        const isPython = state.language === 'Python';
-        const isEmbed = isPortableEmbedLang(state.language);
-        const isEmbedFfmpeg = state.language === 'python_embed_ffmpeg_ui';
+        const isPy = state.language === 'python';
+        const isEmbed = isPortableEmbed(state.language);
+        const isEmbedFfmpeg = state.language === 'python_embed_ffmpeg';
 
-        el.otherLangContainer.classList.toggle('hidden', !isOther);
-        el.badgePythonRec.classList.toggle('hidden', !(isPython || isEmbed));
+        el.otherLangBox.classList.toggle('hidden', !isOther);
         el.badgeWinRec.classList.toggle('hidden', !isEmbed);
-        el.portableInfoBanner.classList.toggle('hidden', !isEmbed);
+        el.badgeBatRec.classList.toggle('hidden', !(isPy || isEmbed));
+        el.portableBanner.classList.toggle('hidden', !isEmbed);
 
         if (isEmbed) {
-          el.portableInfoTitle.textContent = isEmbedFfmpeg
-            ? 'USB完結の動画・音声編集／メディア処理構成（python_embed + FFmpeg + ブラウザUI）'
-            : 'PCインストール不要・USB完結Webアプリ構成（python_embed + ブラウザUI）';
-          el.portableInfoDesc.innerHTML = isEmbedFfmpeg
-            ? 'OS（Windows）、ブラウザUI、setup.bat／start.bat、相対パス、ツリー構成、導入手順を自動最適化しました。<code class="px-1 py-0.5 rounded bg-white/80 font-mono text-[11px]">.\\python_embed\\python.exe</code> と <code class="px-1 py-0.5 rounded bg-white/80 font-mono text-[11px]">.\\ffmpeg\\bin\\ffmpeg.exe</code> を相対パスで使う技術要件がプロンプトに自動挿入されます。'
-            : 'OS（Windows）、ブラウザUI、setup.bat／start.bat、相対パス、ツリー構成、導入手順を自動最適化しました。<code class="px-1 py-0.5 rounded bg-white/80 font-mono text-[11px]">.\\python_embed\\python.exe</code> や <code class="px-1 py-0.5 rounded bg-white/80 font-mono text-[11px]">._pth</code> 設定などの技術要件がプロンプトに自動挿入されます。';
+          el.portableBannerTitle.textContent = isEmbedFfmpeg
+            ? 'USB完結・動画/音声処理構成（python_embed + FFmpeg + ブラウザUI）'
+            : 'USBポータブルWebアプリ構成（python_embed + ブラウザUI）';
+          el.portableBannerDesc.textContent = isEmbedFfmpeg
+            ? 'Windows・ブラウザUI・setup.bat/start.bat・相対パス・ツリー構成・初心者手順を連携設定しました。プロンプトには .\\python_embed\\python.exe と .\\ffmpeg\\bin\\ffmpeg.exe を相対パスで使う技術要件が自動挿入されます。'
+            : 'Windows・ブラウザUI・setup.bat/start.bat・相対パス・ツリー構成・初心者手順を連携設定しました。プロンプトには .\\python_embed\\python.exe や ._pth 設定などの技術要件が自動挿入されます。';
         }
 
         if (isAuto) {
-          el.langHint.textContent = '迷ったら「おまかせ」でOK！初心者が動かしやすい言語をAIが選んでくれます。';
+          el.langHint.textContent = '迷ったら「おまかせ」でOK！初心者がつまずきにくい言語をAIが選んでくれます。';
           el.langHint.className = 'text-xs text-indigo-600 mt-1.5';
         } else if (isEmbed) {
           el.langHint.textContent = 'PC本体を汚さずUSBメモリ内で完結動作するWindows向けポータブル構成です。';
           el.langHint.className = 'text-xs text-emerald-700 font-medium mt-1.5';
-        } else if (isPython) {
-          el.langHint.textContent = 'Python選択時は起動用スクリプト（.bat / .command等）の生成を自動でON提案します。';
+        } else if (isPy) {
+          el.langHint.textContent = 'Python選択時は起動用スクリプト（.bat / .command等）の生成をおすすめしています。';
           el.langHint.className = 'text-xs text-slate-500 mt-1.5';
         } else {
-          el.langHint.textContent = '選択した言語に合わせた実装と手順をAIに依頼します。';
+          el.langHint.textContent = '選択した言語・構成に合わせたコードと導入手順をAIに依頼します。';
           el.langHint.className = 'text-xs text-slate-500 mt-1.5';
         }
 
-        // OS・構成に応じてスクリプトオプションのラベル文言を調整
+        // OSに応じてスクリプトオプションのラベルを動的に切替
         if (isEmbed) {
-          el.optScriptTitle.textContent = '初回セットアップ用（setup.bat）＆起動用（start.bat）を生成する';
-          el.optScriptDesc.textContent = 'python_embed の初期設定を行う setup.bat と、ローカルサーバー起動＋自動でブラウザを開く start.bat を作成します。';
-        } else if (state.os === 'Windows') {
-          el.optScriptTitle.textContent = '起動用・インストール用スクリプト（.bat）を生成する';
-          el.optScriptDesc.textContent = 'Windowsでダブルクリックするだけで環境構築・起動ができる install.bat / run.bat を作成します。';
-        } else if (state.os === 'Mac') {
-          el.optScriptTitle.textContent = '起動用・インストール用スクリプト（.command / .sh）を生成する';
-          el.optScriptDesc.textContent = 'Macで簡単に環境構築・起動ができる .command または .sh スクリプトと実行権限手順を作成します。';
+          el.optBatLabel.textContent = '起動用・インストール用スクリプト（setup.bat / start.bat）も生成する';
+          el.optBatDesc.textContent = 'python_embed の初期設定を行う setup.bat と、ローカルサーバー起動＋自動でブラウザを開く start.bat を作成します。';
+        } else if (state.os === 'windows') {
+          el.optBatLabel.textContent = '起動用・インストール用スクリプト（install.bat / start.bat 等）も生成する';
+          el.optBatDesc.textContent = 'Windowsでダブルクリックするだけで環境構築・起動ができる .bat ファイルを作成します。';
+        } else if (state.os === 'mac') {
+          el.optBatLabel.textContent = '起動用・インストール用スクリプト（.command / .sh）も生成する';
+          el.optBatDesc.textContent = 'Macで簡単に環境構築・起動ができる .command または .sh スクリプトと実行権限手順を作成します。';
         } else {
-          el.optScriptTitle.textContent = '起動用・インストール用スクリプト（.bat / .sh 等）を生成する';
-          el.optScriptDesc.textContent = '必要に応じてダブルクリック等で簡単に導入・起動できるスクリプトも作成します。';
+          el.optBatLabel.textContent = '起動用・インストール用スクリプト（.bat / .command / .sh 等）も生成する';
+          el.optBatDesc.textContent = '必要に応じてダブルクリック等で簡単に導入・起動できるスクリプトを作成します。';
         }
       }
 
-      /** 並び替え・削除・追加に対応した共通箇条書きリスト描画 */
-      function renderBulletList(containerEl, listKey, placeholders, focusIndex = null) {
+      function renderBullets(focusIndex) {
+        const listKey = state.mode === 'new' ? 'newBullets' : 'fixBullets';
+        const placeholders = state.mode === 'new' ? NEW_BULLET_PLACEHOLDERS : FIX_BULLET_PLACEHOLDERS;
         const items = state[listKey];
-        containerEl.innerHTML = '';
 
-        items.forEach((text, idx) => {
+        el.bulletListContainer.innerHTML = '';
+
+        items.forEach(function (value, idx) {
           const row = document.createElement('div');
           row.className = 'flex items-center gap-1.5 sm:gap-2';
 
           // 番号バッジ
-          const numBadge = document.createElement('span');
-          numBadge.className = 'w-6 h-7 rounded-lg bg-slate-100 text-slate-600 text-xs font-bold flex items-center justify-center shrink-0 select-none';
-          numBadge.textContent = `${idx + 1}`;
+          const badge = document.createElement('span');
+          badge.className = 'w-6 h-7 rounded-lg bg-slate-100 text-slate-600 text-xs font-bold flex items-center justify-center shrink-0 select-none';
+          badge.textContent = String(idx + 1);
 
-          // 入力欄
+          // テキスト入力
           const input = document.createElement('input');
           input.type = 'text';
-          input.value = text;
+          input.value = value;
           input.placeholder = placeholders[idx % placeholders.length];
           input.className = 'flex-1 min-w-0 rounded-xl border border-slate-300 px-3 py-2 text-sm text-slate-800 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition';
-          input.addEventListener('input', (e) => {
+
+          input.addEventListener('input', function (e) {
             state[listKey][idx] = e.target.value;
             updatePreview();
           });
-          input.addEventListener('keydown', (e) => {
+
+          input.addEventListener('keydown', function (e) {
             if (e.key === 'Enter' && !e.isComposing) {
               e.preventDefault();
               state[listKey].splice(idx + 1, 0, '');
-              renderBulletList(containerEl, listKey, placeholders, idx + 1);
+              renderBullets(idx + 1);
               updatePreview();
             }
           });
 
-          // 上移動ボタン
-          const upBtn = document.createElement('button');
-          upBtn.type = 'button';
-          upBtn.title = '上へ移動';
-          upBtn.disabled = idx === 0;
-          upBtn.className = `p-1.5 rounded-lg transition shrink-0 ${
-            idx === 0
-              ? 'text-slate-200 cursor-not-allowed'
-              : 'text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 cursor-pointer'
-          }`;
-          upBtn.innerHTML = `
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
-            </svg>
-          `;
-          upBtn.addEventListener('click', () => {
+          // 上へ移動 (▲)
+          const btnUp = document.createElement('button');
+          btnUp.type = 'button';
+          btnUp.title = '上へ移動';
+          btnUp.disabled = idx === 0;
+          btnUp.textContent = '▲';
+          btnUp.className = idx === 0
+            ? 'w-7 h-7 rounded-lg text-[10px] font-bold text-slate-200 cursor-not-allowed shrink-0'
+            : 'w-7 h-7 rounded-lg text-[10px] font-bold text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 transition cursor-pointer shrink-0';
+          btnUp.addEventListener('click', function () {
             if (idx > 0) {
-              const temp = state[listKey][idx - 1];
+              const tmp = state[listKey][idx - 1];
               state[listKey][idx - 1] = state[listKey][idx];
-              state[listKey][idx] = temp;
-              renderBulletList(containerEl, listKey, placeholders, idx - 1);
+              state[listKey][idx] = tmp;
+              renderBullets(idx - 1);
               updatePreview();
             }
           });
 
-          // 下移動ボタン
-          const downBtn = document.createElement('button');
-          downBtn.type = 'button';
-          downBtn.title = '下へ移動';
-          downBtn.disabled = idx === items.length - 1;
-          downBtn.className = `p-1.5 rounded-lg transition shrink-0 ${
-            idx === items.length - 1
-              ? 'text-slate-200 cursor-not-allowed'
-              : 'text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 cursor-pointer'
-          }`;
-          downBtn.innerHTML = `
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-            </svg>
-          `;
-          downBtn.addEventListener('click', () => {
+          // 下へ移動 (▼)
+          const btnDown = document.createElement('button');
+          btnDown.type = 'button';
+          btnDown.title = '下へ移動';
+          btnDown.disabled = idx === items.length - 1;
+          btnDown.textContent = '▼';
+          btnDown.className = idx === items.length - 1
+            ? 'w-7 h-7 rounded-lg text-[10px] font-bold text-slate-200 cursor-not-allowed shrink-0'
+            : 'w-7 h-7 rounded-lg text-[10px] font-bold text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 transition cursor-pointer shrink-0';
+          btnDown.addEventListener('click', function () {
             if (idx < state[listKey].length - 1) {
-              const temp = state[listKey][idx + 1];
+              const tmp = state[listKey][idx + 1];
               state[listKey][idx + 1] = state[listKey][idx];
-              state[listKey][idx] = temp;
-              renderBulletList(containerEl, listKey, placeholders, idx + 1);
+              state[listKey][idx] = tmp;
+              renderBullets(idx + 1);
               updatePreview();
             }
           });
 
-          // 削除ボタン
-          const delBtn = document.createElement('button');
-          delBtn.type = 'button';
-          delBtn.title = 'この項目を削除';
-          delBtn.className = 'p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition shrink-0 cursor-pointer';
-          delBtn.innerHTML = `
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          `;
-          delBtn.addEventListener('click', () => {
+          // 削除 (×)
+          const btnDel = document.createElement('button');
+          btnDel.type = 'button';
+          btnDel.title = 'この項目を削除';
+          btnDel.textContent = '×';
+          btnDel.className = 'w-7 h-7 rounded-lg text-sm font-bold text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition cursor-pointer shrink-0';
+          btnDel.addEventListener('click', function () {
             if (state[listKey].length <= 1) {
               state[listKey][0] = '';
             } else {
               state[listKey].splice(idx, 1);
             }
-            renderBulletList(containerEl, listKey, placeholders);
+            renderBullets();
             updatePreview();
           });
 
-          row.appendChild(numBadge);
+          row.appendChild(badge);
           row.appendChild(input);
-          row.appendChild(upBtn);
-          row.appendChild(downBtn);
-          row.appendChild(delBtn);
-          containerEl.appendChild(row);
+          row.appendChild(btnUp);
+          row.appendChild(btnDown);
+          row.appendChild(btnDel);
+          el.bulletListContainer.appendChild(row);
 
           if (focusIndex === idx) {
-            setTimeout(() => input.focus(), 0);
+            setTimeout(function () {
+              input.focus();
+            }, 0);
           }
         });
       }
 
       function renderUploadedFiles() {
         if (state.uploadedFiles.length === 0) {
-          el.uploadedFileList.classList.add('hidden');
-          el.uploadedFileItems.innerHTML = '';
+          el.uploadedFilesWrapper.classList.add('hidden');
+          el.uploadedFilesChips.innerHTML = '';
           return;
         }
 
-        el.uploadedFileList.classList.remove('hidden');
-        el.uploadedFileItems.innerHTML = '';
+        el.uploadedFilesWrapper.classList.remove('hidden');
+        el.uploadedFilesChips.innerHTML = '';
 
-        state.uploadedFiles.forEach((file, idx) => {
-          const lineCount = file.content.split(/\r?\n/).length;
+        state.uploadedFiles.forEach(function (file, idx) {
+          const lines = file.content.split(/\r?\n/).length;
           const chip = document.createElement('div');
           chip.className = 'inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white border border-slate-300 text-xs shadow-2xs';
-          chip.innerHTML = `
-            <span class="font-mono font-semibold text-slate-800 max-w-[180px] truncate" title="${escapeHtml(file.name)}">${escapeHtml(file.name)}</span>
-            <span class="text-slate-400">(${lineCount}行)</span>
-            <button type="button" data-remove-file="${idx}" class="text-slate-400 hover:text-rose-600 transition cursor-pointer ml-0.5" title="削除">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          `;
-          el.uploadedFileItems.appendChild(chip);
-        });
 
-        el.uploadedFileItems.querySelectorAll('[data-remove-file]').forEach((btn) => {
-          btn.addEventListener('click', () => {
-            const idx = Number(btn.getAttribute('data-remove-file'));
+          const nameSpan = document.createElement('span');
+          nameSpan.className = 'font-mono font-semibold text-slate-800 max-w-[180px] truncate';
+          nameSpan.title = file.name;
+          nameSpan.textContent = file.name;
+
+          const countSpan = document.createElement('span');
+          countSpan.className = 'text-slate-400';
+          countSpan.textContent = '(' + lines + '行)';
+
+          const removeBtn = document.createElement('button');
+          removeBtn.type = 'button';
+          removeBtn.title = 'ファイルを削除';
+          removeBtn.textContent = '×';
+          removeBtn.className = 'text-slate-400 hover:text-rose-600 font-bold text-sm leading-none ml-0.5 cursor-pointer';
+          removeBtn.addEventListener('click', function () {
             state.uploadedFiles.splice(idx, 1);
             renderUploadedFiles();
             updatePreview();
           });
+
+          chip.appendChild(nameSpan);
+          chip.appendChild(countSpan);
+          chip.appendChild(removeBtn);
+          el.uploadedFilesChips.appendChild(chip);
         });
       }
 
-      function syncFormFromState() {
+      function syncAllFormInputsFromState() {
         el.selectLlm.value = state.llm;
         el.selectLanguage.value = state.language;
         el.inputOtherLang.value = state.otherLang;
         el.selectOs.value = state.os;
-        el.selectUiType.value = state.uiType;
+        el.selectUiStyle.value = state.uiStyle;
 
-        el.newPurpose.value = state.newPurpose;
+        el.newGoal.value = state.newGoal;
         el.newScene.value = state.newScene;
         el.newIo.value = state.newIo;
-        el.newNotes.value = state.newNotes;
 
-        document.querySelectorAll('input[name="chatState"]').forEach((r) => {
-          r.checked = r.value === state.chatState;
-        });
-        el.chkAttachDirect.checked = state.attachDirect;
+        el.fixCurrent.value = state.fixCurrent;
+        el.fixExpected.value = state.fixExpected;
+        el.fixErrorMsg.value = state.fixErrorMsg;
+
         el.pastedCode.value = state.pastedCode;
-        el.modCurrentState.value = state.modCurrentState;
-        el.modExpectedState.value = state.modExpectedState;
-        el.modErrorMessage.value = state.modErrorMessage;
+        el.chkAttachNotice.checked = state.attachNotice;
 
+        document.querySelectorAll('input[name="fixContext"]').forEach(function (radio) {
+          radio.checked = radio.value === state.fixContext;
+        });
+
+        el.optBat.checked = state.optBat;
+        el.optTree.checked = state.optTree;
+        el.optRelativePath.checked = state.optRelativePath;
+        el.optSetupGuide.checked = state.optSetupGuide;
         el.optNoOmit.checked = state.optNoOmit;
         el.optClarifyFirst.checked = state.optClarifyFirst;
-        el.optScript.checked = state.optScript;
-        el.optTree.checked = state.optTree;
-        el.optPortable.checked = state.optPortable;
-        el.optSetupGuide.checked = state.optSetupGuide;
 
-        document.querySelectorAll('input[name="recommendMode"]').forEach((r) => {
-          r.checked = r.value === state.recommendMode;
+        document.querySelectorAll('input[name="recommendMode"]').forEach(function (radio) {
+          radio.checked = radio.value === state.recommendMode;
         });
 
-        updateModeUI();
-        updateLlmHint();
-        updateLanguageAndOsUI();
+        updateModeAndContextUI();
+        updateSettingsHintsUI();
         renderUploadedFiles();
-        renderBulletList(el.newBulletList, 'newBullets', NEW_BULLET_PLACEHOLDERS);
-        renderBulletList(el.modBulletList, 'modBullets', MOD_BULLET_PLACEHOLDERS);
+        renderBullets();
         updatePreview();
       }
 
       // ============================================================
-      // 5. プロンプト生成エンジン
+      // 4. プロンプト生成ロジック
       // ============================================================
       function getMissingRequiredFields() {
         const missing = [];
@@ -1467,27 +1357,34 @@
           missing.push('使用する言語名');
         }
         if (state.mode === 'new') {
-          if (!state.newPurpose.trim()) missing.push('① 何を作るか（目的）');
+          if (!state.newGoal.trim()) missing.push('① 何を作りたいか');
           if (!state.newScene.trim()) missing.push('② 誰が・どんな場面で使うか');
           if (!state.newIo.trim()) missing.push('③ 入力と出力');
-          if (!state.newBullets.some((b) => b.trim())) missing.push('やってほしいこと・機能（1つ以上）');
+          if (!state.newBullets.some(function (b) { return b.trim().length > 0; })) {
+            missing.push('やりたいこと・機能（1つ以上）');
+          }
         } else {
-          if (!state.modBullets.some((b) => b.trim())) missing.push('修正・追加したい内容（1つ以上）');
+          if (!state.fixCurrent.trim()) missing.push('① 現状');
+          if (!state.fixExpected.trim()) missing.push('② 期待');
+          if (!state.fixBullets.some(function (b) { return b.trim().length > 0; })) {
+            missing.push('修正・追加したい点（1つ以上）');
+          }
         }
         return missing;
       }
 
-      function buildPortableTechLines() {
-        if (!isPortableEmbedLang(state.language)) return [];
+      function buildPortableLines() {
+        if (!isPortableEmbed(state.language)) return [];
         const lines = [
-          'PC本体のPython環境に依存せず、同封の Windows Embeddable Package（`.\\python_embed\\python.exe`）を相対パスで起動するポータブル構成にしてください。',
-          '`python3xx._pth` の `import site` のコメントアウト解除や `get-pip.py` の導入手順を分かりやすく解説し、初回セットアップ用の `setup.bat` と起動用の `start.bat`（ローカルサーバー起動＋自動でブラウザを開く）を作成してください。',
-          'フロントエンドはブラウザUI（HTML / CSS / JavaScript / Canvas）とし、バックエンドのPythonローカルサーバー（標準の `http.server` または Flask / FastAPI 等、導入が簡単な構成）と連携させてください。',
-          '一時ファイルや書き出し先も含め、すべてのファイル参照をプロジェクトフォルダ内の相対パスで完結させ、USBメモリや外付けSSDのドライブ文字が変わっても問題なく動作するようにしてください。',
+          'PC本体のPython環境に依存せず、同封の Windows Embeddable Package（".\\python_embed\\python.exe"）を相対パスで起動するUSB完結ポータブル構成にしてください。',
+          '"python3xx._pth" の "import site" のコメントアウト解除や、必要に応じて "get-pip.py" を導入する手順を初心者にも分かりやすく説明してください。',
+          '初回セットアップ用の "setup.bat" と、ローカルサーバーを起動して自動でブラウザUIを開く "start.bat" を生成してください。',
+          'フロントエンドはブラウザUI（HTML / CSS / JavaScript / Canvas）とし、バックエンドのPythonローカルサーバーと連携する構成にしてください。',
+          '一時ファイルや出力先を含め、すべてのファイル参照をプロジェクトフォルダ内の相対パスで完結させ、USBメモリのドライブ文字が変わっても問題なく動作するようにしてください。',
         ];
-        if (state.language === 'python_embed_ffmpeg_ui') {
+        if (state.language === 'python_embed_ffmpeg') {
           lines.push(
-            'FFmpegはPCの環境変数PATHに依存せず、プロジェクトフォルダ内の相対パス（例：`.\\ffmpeg\\bin\\ffmpeg.exe`）からポータブル版FFmpegを呼び出す設計にしてください。また、初心者向けにFFmpegの入手先と正しい配置場所をわかりやすく説明してください。'
+            'FFmpegはPCの環境変数PATHに依存せず、プロジェクト内の相対パス（".\\ffmpeg\\bin\\ffmpeg.exe"）からポータブル版FFmpegを呼び出す設計にしてください。また、初心者向けに python_embed と FFmpeg の公式ダウンロード先および正しい配置場所を丁寧に説明してください。'
           );
         }
         return lines;
@@ -1495,356 +1392,363 @@
 
       function buildConstraintLines() {
         const lines = [];
-        const isEmbed = isPortableEmbedLang(state.language);
+        const isEmbed = isPortableEmbed(state.language);
 
-        // 言語おまかせ時の自動挿入
         if (state.language === 'auto') {
-          lines.push('初心者が環境構築でつまずきにくく、目的に最も適した言語を1つ選び、その理由をわかりやすく説明してから実装してください。');
+          lines.push('初心者が環境構築で最もつまずきにくく、目的に最適なプログラミング言語を1つ選び、その理由を分かりやすく説明してから実装に進んでください。');
         }
 
-        // 壁打ちモード
         if (state.optClarifyFirst) {
-          lines.push('いきなりコード全文を書き始めず、まずは要件の整理と、不足している情報や曖昧な点の確認質問を行ってください。私の回答を待ってから実装に進んでください。');
+          lines.push('いきなりコード全文を書き始めず、まずは要件の整理と不足情報・曖昧な点の確認質問を行ってください。私の回答を待ってから実装に進んでください。');
         }
 
-        // 省略禁止
         if (state.optNoOmit) {
           lines.push('コードは「...」「// 以下省略」などで省略せず、そのままコピー＆ペーストして動く完全なコード（全文）を出力してください。');
         }
 
-        // ファイル構成ツリー
-        if (state.optTree) {
-          lines.push('コード本体を示す前に、必要なファイル構成・ディレクトリ構造をツリー形式で分かりやすく提示してください。');
+        if (state.optRelativePath && !isEmbed) {
+          lines.push('ファイルやフォルダのパスは特定のPC固有の絶対パスを使わず、USBメモリなど保存場所を変えてもそのまま動作する相対パスで記述してください。');
         }
 
-        // ポータブル設計
-        if (state.optPortable && !isEmbed) {
-          lines.push('保存場所の指定がない場合、USBメモリ内や別PCへフォルダごと移動してもそのまま動作するように、特定の環境固有の絶対パスではなく相対パスで記述してください。');
-        }
-
-        // 起動用・インストール用スクリプト（python_embed時は専用要件に含まれるため重複回避）
-        if (state.optScript && !isEmbed) {
-          if (state.os === 'Windows') {
-            lines.push('Windows初心者でもダブルクリックで簡単に扱えるよう、必要な環境構築・ライブラリ導入を行う「install.bat（インストール用）」と、プログラムを実行する「run.bat（起動用）」のバッチファイルもあわせて作成してください。');
-          } else if (state.os === 'Mac') {
-            lines.push('Mac初心者でも簡単に扱えるよう、必要な環境構築・ライブラリ導入を行う「install.command（または install.sh）」と、プログラムを実行する「run.command（または run.sh）」を作成し、初回実行時の権限付与（chmod +x 等）の手順もあわせて説明してください。');
+        if (state.optBat && !isEmbed) {
+          if (state.os === 'windows') {
+            lines.push('Windows初心者でもダブルクリックで簡単に扱えるよう、環境構築・ライブラリ導入用の「setup.bat（または install.bat）」と、プログラム起動用の「start.bat」もあわせて作成してください。');
+          } else if (state.os === 'mac') {
+            lines.push('Mac初心者でも簡単に扱えるよう、環境構築用の「setup.command（または .sh）」と起動用の「start.command（または .sh）」を作成し、初回実行時の権限付与手順もあわせて説明してください。');
           } else {
-            lines.push('初心者でも簡単にセットアップ・実行できるよう、必要に応じてOSに応じたインストール用・起動用スクリプト（Windows向け .bat / Mac向け .command や .sh 等）もあわせて作成してください。');
+            lines.push('初心者でも簡単に環境構築・起動ができるよう、OSに応じたインストール用・起動用スクリプト（Windows向け .bat / Mac向け .command や .sh 等）もあわせて作成してください。');
           }
         }
 
-        // 導入・環境構築手順
-        if (state.optSetupGuide) {
-          lines.push('基本はプログラミング初学者が使用することを前提としてください。ローカルサーバーの起動や、必要なツール・ランタイム・ライブラリのダウンロードがある場合は、初心者にも分かる手順でステップごとに丁寧に説明してください。');
+        if (state.recommendMode === 'include') {
+          lines.push('使いやすくなる「おすすめ機能」や親切なエラー対策があれば、積極的に提案しコードへ追加・実装してください（追加した機能は分かりやすく紹介してください）。');
+        } else if (state.recommendMode === 'suggest') {
+          lines.push('おすすめ機能や改善アイデアがある場合は、コードには勝手に組み込まず、回答の最後に箇条書きで提案だけリストアップしてください。');
+        } else {
+          lines.push('余計な機能は追加せず、まずは依頼した機能だけでシンプルかつ確実に動くように実装してください。');
         }
 
-        // おすすめ機能の扱い
-        if (state.recommendMode === 'suggest') {
-          lines.push('今回の要件にない「おすすめ機能」や改善アイデアがある場合は、コードには勝手に組み込まず、回答の最後に箇条書きで提案だけリストアップしてください。');
-        } else if (state.recommendMode === 'include') {
-          lines.push('初学者にとって使いやすくなる「おすすめ機能」や親切なエラー対策があれば、最初からコードに組み込んで実装してください（追加した機能は分かりやすく紹介してください）。');
-        } else if (state.recommendMode === 'none') {
-          lines.push('余計な機能の追加や仕様の提案は行わず、指定した内容だけでシンプルかつ確実に動くように実装してください。');
-        }
-
-        lines.push('コード内には、初学者が後から読んで処理の流れを理解できるよう、適度に日本語のコメントを入れてください。');
-
+        lines.push('コード内には、プログラミング初学者が後から読んで処理の流れを理解できるよう、適度に日本語のコメントを入れてください。');
         return lines;
       }
 
-      function buildExistingCodeSection() {
-        if (state.mode !== 'modify' || state.chatState !== 'new_chat') {
+      function buildOutputFormatLines() {
+        const lines = [];
+        if (state.optTree) {
+          lines.push('コード本体を示す前に、必要なファイル構成・ディレクトリツリーを分かりやすく提示してください。');
+        }
+        if (state.optSetupGuide) {
+          lines.push('プログラミング初学者が利用することを前提に、ローカルサーバーの起動方法や必要なツール・ライブラリのダウンロードおよび導入手順をステップごとに丁寧に説明してください。');
+        }
+        if (state.llm === 'chatgpt') {
+          lines.push('ファイルが複数になる場合は、各コードブロックの直前にファイル名を明確に記載してください。');
+        } else if (state.llm === 'gemini') {
+          lines.push('回答は「1. 構成・方針の説明 → 2. コード全文 → 3. 実行・導入手順」の順で整理して出力してください。');
+        }
+        return lines;
+      }
+
+      function buildExistingCodeBlock() {
+        if (state.mode !== 'fix' || state.fixContext !== 'new') {
           return '';
         }
 
-        if (state.attachDirect) {
-          return '※現在のソースコードはチャット画面にファイルとして直接添付します。添付ファイルの内容を確認したうえで回答してください。';
+        const blocks = [];
+        if (state.attachNotice) {
+          blocks.push('※関連するソースコードファイルはチャット画面に直接添付（アップロード）します。添付ファイルの内容もあわせて確認してください。');
         }
 
-        const blocks = [];
-        state.uploadedFiles.forEach((file) => {
-          const fence = getFenceLangFromFilename(file.name);
-          blocks.push(`### ファイル名: ${file.name}\n\`\`\`${fence}\n${file.content.trimEnd()}\n\`\`\``);
+        state.uploadedFiles.forEach(function (file) {
+          const fenceLang = getFenceLang(file.name);
+          blocks.push('### ファイル名: ' + file.name + '\n' + FENCE + fenceLang + '\n' + file.content.trimEnd() + '\n' + FENCE);
         });
 
         if (state.pastedCode.trim()) {
-          blocks.push(`### 現在のコード（貼り付け）\n\`\`\`\n${state.pastedCode.trimEnd()}\n\`\`\``);
+          blocks.push('### 現在のコード（貼り付け）\n' + FENCE + '\n' + state.pastedCode.trimEnd() + '\n' + FENCE);
         }
 
         return blocks.join('\n\n');
       }
 
-      function generatePrompt() {
-        const lang = getEffectiveLanguage();
-        const portableLines = buildPortableTechLines();
+      function buildClaudeXmlPrompt() {
+        const langLabel = getEffectiveLanguageLabel();
+        const osLabel = OS_LABELS[state.os] || state.os;
+        const uiLabel = UI_STYLE_LABELS[state.uiStyle] || state.uiStyle;
+        const portableLines = buildPortableLines();
         const constraints = buildConstraintLines();
-        const existingCode = buildExistingCodeSection();
+        const outputFormats = buildOutputFormatLines();
+        const existingCode = buildExistingCodeBlock();
 
-        if (state.llm === 'claude') {
-          return buildClaudeXmlPrompt(lang, portableLines, constraints, existingCode);
-        }
-        return buildMarkdownPrompt(lang, portableLines, constraints, existingCode);
-      }
-
-      /** Claude向け：XMLタグ構造プロンプト */
-      function buildClaudeXmlPrompt(lang, portableLines, constraints, existingCode) {
         const parts = [];
 
         parts.push(
-          `<role>\nあなたはプログラミング初学者にも優しく分かりやすく指導できる、経験豊富なソフトウェアエンジニアです。\n専門用語は必要に応じて噛み砕いて説明し、確実に動作するコードと丁寧な手順を提供してください。\n</role>`
+          '<role>\nあなたはプログラミング初学者にも優しく分かりやすく指導できる、経験豊富なソフトウェアエンジニアです。\n専門用語は必要に応じて噛み砕き、確実に動作するコードと丁寧な手順を提供してください。\n</role>'
         );
 
-        const taskLines = [];
+        const contextLines = [];
         if (state.mode === 'new') {
-          taskLines.push('以下の要件を満たすプログラムを新規作成してください。');
-        } else if (state.chatState === 'continue') {
-          taskLines.push('これまでの会話で作成したプログラムについて、以下の内容をもとに修正・機能追加を行ってください。');
+          contextLines.push('- 依頼種別: 新規プログラム作成');
+        } else if (state.fixContext === 'continue') {
+          contextLines.push('- 依頼種別: 既存プログラムの修正・機能追加（同じチャットでの継続）');
         } else {
-          taskLines.push('新しいチャットからの修正・機能追加依頼です。共有する既存のコードを確認し、以下の内容をもとに修正・機能追加を行ってください。');
+          contextLines.push('- 依頼種別: 既存プログラムの修正・機能追加（新しいチャットからの依頼・既存コード共有あり）');
         }
-        parts.push(`<task>\n${taskLines.join('\n')}\n</task>`);
+        contextLines.push('- プログラミング言語・構成: ' + langLabel);
+        contextLines.push('- 動作させるOS: ' + osLabel);
+        contextLines.push('- 実行形態（見た目）: ' + uiLabel);
+        parts.push('<context>\n' + contextLines.join('\n') + '\n</context>');
 
-        parts.push(
-          `<environment>\n- プログラミング言語・構成: ${lang}\n- 動作させるOS: ${state.os}\n- 実行形態・見た目: ${state.uiType}\n</environment>`
-        );
+        const reqLines = [];
+        if (state.mode === 'new') {
+          reqLines.push('- ① 何を作りたいか（ゴール・概要）: ' + (state.newGoal.trim() || '（未入力）'));
+          reqLines.push('- ② 誰が・どんな場面で使うか（利用シーン）: ' + (state.newScene.trim() || '（未入力）'));
+          reqLines.push('- ③ 入力と出力: ' + (state.newIo.trim() || '（未入力）'));
+          const bullets = state.newBullets.map(function (b) { return b.trim(); }).filter(Boolean);
+          reqLines.push('- やりたいこと・機能:');
+          if (bullets.length > 0) {
+            bullets.forEach(function (b, i) {
+              reqLines.push('  ' + (i + 1) + '. ' + b);
+            });
+          } else {
+            reqLines.push('  - （未入力）');
+          }
+        } else {
+          reqLines.push('- ① 現状（今どうなっているか）: ' + (state.fixCurrent.trim() || '（未入力）'));
+          reqLines.push('- ② 期待（どうなってほしいか）: ' + (state.fixExpected.trim() || '（未入力）'));
+          if (state.fixErrorMsg.trim()) {
+            reqLines.push('- ③ エラーメッセージ:\n' + FENCE + '\n' + state.fixErrorMsg.trim() + '\n' + FENCE);
+          }
+          const bullets = state.fixBullets.map(function (b) { return b.trim(); }).filter(Boolean);
+          reqLines.push('- 修正・追加したい点:');
+          if (bullets.length > 0) {
+            bullets.forEach(function (b, i) {
+              reqLines.push('  ' + (i + 1) + '. ' + b);
+            });
+          } else {
+            reqLines.push('  - （未入力）');
+          }
+        }
+        parts.push('<requirements>\n' + reqLines.join('\n') + '\n</requirements>');
 
         if (portableLines.length > 0) {
-          parts.push(
-            `<portable_architecture>\n${portableLines.map((l) => `- ${l}`).join('\n')}\n</portable_architecture>`
-          );
+          parts.push('<portable_architecture>\n' + portableLines.map(function (l) { return '- ' + l; }).join('\n') + '\n</portable_architecture>');
         }
 
-        if (state.mode === 'new') {
-          const reqLines = [
-            `- ① 何を作るか（アプリ名・目的）: ${state.newPurpose.trim() || '（未入力）'}`,
-            `- ② 誰が・どんな場面で使うか: ${state.newScene.trim() || '（未入力）'}`,
-            `- ③ 入力と出力: ${state.newIo.trim() || '（未入力）'}`,
-          ];
-          const validBullets = state.newBullets.map((b) => b.trim()).filter(Boolean);
-          if (validBullets.length > 0) {
-            reqLines.push('- やってほしいこと・機能:');
-            validBullets.forEach((b, i) => reqLines.push(`  ${i + 1}. ${b}`));
-          } else {
-            reqLines.push('- やってほしいこと・機能: （未入力）');
-          }
-          if (state.newNotes.trim()) {
-            reqLines.push(`- 補足・こだわり: ${state.newNotes.trim()}`);
-          }
-          parts.push(`<requirements>\n${reqLines.join('\n')}\n</requirements>`);
-        } else {
-          const modLines = [];
-          if (state.modCurrentState.trim()) {
-            modLines.push(`- 今どうなっているか（現状・問題）:\n  ${state.modCurrentState.trim().replace(/\n/g, '\n  ')}`);
-          }
-          if (state.modExpectedState.trim()) {
-            modLines.push(`- どうなってほしいか（期待する動作）:\n  ${state.modExpectedState.trim().replace(/\n/g, '\n  ')}`);
-          }
-          if (state.modErrorMessage.trim()) {
-            modLines.push(`- エラーメッセージ:\n\`\`\`\n${state.modErrorMessage.trim()}\n\`\`\``);
-          }
-          const validModBullets = state.modBullets.map((b) => b.trim()).filter(Boolean);
-          if (validModBullets.length > 0) {
-            modLines.push('- 修正・追加したい内容:');
-            validModBullets.forEach((b, i) => modLines.push(`  ${i + 1}. ${b}`));
-          } else {
-            modLines.push('- 修正・追加したい内容: （未入力）');
-          }
-          parts.push(`<requirements>\n${modLines.join('\n')}\n</requirements>`);
-        }
+        parts.push('<constraints>\n' + constraints.map(function (l) { return '- ' + l; }).join('\n') + '\n</constraints>');
 
-        parts.push(
-          `<constraints>\n${constraints.map((c) => `- ${c}`).join('\n')}\n</constraints>`
-        );
+        if (outputFormats.length > 0) {
+          parts.push('<output_format>\n' + outputFormats.map(function (l) { return '- ' + l; }).join('\n') + '\n</output_format>');
+        }
 
         if (existingCode) {
-          parts.push(`<existing_code>\n${existingCode}\n</existing_code>`);
+          parts.push('<existing_code>\n' + existingCode + '\n</existing_code>');
         }
 
         return parts.join('\n\n');
       }
 
-      /** 汎用型 / ChatGPT / Gemini 向け：構造化Markdownプロンプト */
-      function buildMarkdownPrompt(lang, portableLines, constraints, existingCode) {
+      function buildMarkdownPrompt() {
+        const langLabel = getEffectiveLanguageLabel();
+        const osLabel = OS_LABELS[state.os] || state.os;
+        const uiLabel = UI_STYLE_LABELS[state.uiStyle] || state.uiStyle;
+        const portableLines = buildPortableLines();
+        const constraints = buildConstraintLines();
+        const outputFormats = buildOutputFormatLines();
+        const existingCode = buildExistingCodeBlock();
+
         const parts = [];
 
-        // 冒頭挨拶・役割
         if (state.llm === 'chatgpt') {
-          parts.push(`# プログラミング依頼\nあなたはプログラミング初学者にも優しく丁寧に教えられる、熟練のエンジニアとして振る舞ってください。`);
+          parts.push('# プログラミング依頼\nあなたはプログラミング初学者にも優しく丁寧に指導できる、熟練のソフトウェアエンジニアとして回答してください。');
         } else if (state.llm === 'gemini') {
-          parts.push(`# プログラミング依頼\n以下の環境・要件・条件に基づき、プログラミング初学者でも迷わず動かせる形でプログラムの作成と解説をお願いします。`);
+          parts.push('# プログラミング依頼\n以下の環境・要件・条件に基づき、プログラミング初学者でも迷わず動かせる形で実装と解説をお願いします。');
         } else {
-          parts.push(`# プログラミング依頼\n以下の内容でプログラミングをお願いします。`);
+          parts.push('# プログラミング依頼\n以下の内容でプログラミングをお願いします。');
         }
 
         if (state.mode === 'new') {
           parts.push('新規でプログラムを作成してください。');
-        } else if (state.chatState === 'continue') {
+        } else if (state.fixContext === 'continue') {
           parts.push('これまでの会話の続きとして、既存プログラムの修正・機能追加をお願いします。');
         } else {
           parts.push('新しいチャットからの修正・機能追加依頼です。共有する既存コード（または添付ファイル）を確認のうえ対応してください。');
         }
 
-        // 1. 開発環境・基本設定
         parts.push(
           [
             '## 1. 開発環境・基本設定',
-            `- **プログラミング言語・構成**: ${lang}`,
-            `- **動作させるOS**: ${state.os}`,
-            `- **実行形態・見た目**: ${state.uiType}`,
+            '- **プログラミング言語・構成**: ' + langLabel,
+            '- **動作させるOS**: ' + osLabel,
+            '- **実行形態（見た目）**: ' + uiLabel,
           ].join('\n')
         );
 
-        let secNum = 2;
+        let secNo = 2;
 
-        // ポータブル構成の技術要件（python_embed選択時のみ自動挿入）
         if (portableLines.length > 0) {
           parts.push(
-            [`## ${secNum}. USBポータブル構成（python_embed）の技術要件`, ...portableLines.map((l) => `- ${l}`)].join('\n')
+            ['## ' + secNo + '. USBポータブル構成（python_embed）の技術要件'].concat(
+              portableLines.map(function (l) { return '- ' + l; })
+            ).join('\n')
           );
-          secNum++;
+          secNo++;
         }
 
-        // 要件セクション
         if (state.mode === 'new') {
           const reqLines = [
-            `## ${secNum}. 作りたいものの要件`,
-            `- **① 何を作るか（アプリ名・目的）**: ${state.newPurpose.trim() || '（未入力）'}`,
-            `- **② 誰が・どんな場面で使うか**: ${state.newScene.trim() || '（未入力）'}`,
-            `- **③ 入力と出力**: ${state.newIo.trim() || '（未入力）'}`,
+            '## ' + secNo + '. 作りたいものの要件',
+            '- **① 何を作りたいか（ゴール・概要）**: ' + (state.newGoal.trim() || '（未入力）'),
+            '- **② 誰が・どんな場面で使うか（利用シーン）**: ' + (state.newScene.trim() || '（未入力）'),
+            '- **③ 入力と出力**: ' + (state.newIo.trim() || '（未入力）'),
+            '- **やりたいこと・機能**:',
           ];
-          const validBullets = state.newBullets.map((b) => b.trim()).filter(Boolean);
-          reqLines.push('- **やってほしいこと・機能**:');
-          if (validBullets.length > 0) {
-            validBullets.forEach((b, i) => reqLines.push(`  ${i + 1}. ${b}`));
+          const bullets = state.newBullets.map(function (b) { return b.trim(); }).filter(Boolean);
+          if (bullets.length > 0) {
+            bullets.forEach(function (b, i) {
+              reqLines.push('  ' + (i + 1) + '. ' + b);
+            });
           } else {
             reqLines.push('  - （未入力）');
           }
-          if (state.newNotes.trim()) {
-            reqLines.push(`- **補足・こだわり**: ${state.newNotes.trim()}`);
-          }
           parts.push(reqLines.join('\n'));
         } else {
-          const modLines = [`## ${secNum}. 修正・機能追加の要件`];
-          if (state.modCurrentState.trim()) {
-            modLines.push(`- **今どうなっているか（現状・起きている問題）**:\n  ${state.modCurrentState.trim().replace(/\n/g, '\n  ')}`);
+          const fixLines = [
+            '## ' + secNo + '. 修正・機能追加の要件',
+            '- **① 現状（今どうなっているか）**: ' + (state.fixCurrent.trim() || '（未入力）'),
+            '- **② 期待（どうなってほしいか）**: ' + (state.fixExpected.trim() || '（未入力）'),
+          ];
+          if (state.fixErrorMsg.trim()) {
+            fixLines.push('- **③ エラーメッセージ**:\n' + FENCE + '\n' + state.fixErrorMsg.trim() + '\n' + FENCE);
           }
-          if (state.modExpectedState.trim()) {
-            modLines.push(`- **どうなってほしいか（期待する動作）**:\n  ${state.modExpectedState.trim().replace(/\n/g, '\n  ')}`);
-          }
-          if (state.modErrorMessage.trim()) {
-            modLines.push(`- **エラーメッセージ**:\n\`\`\`\n${state.modErrorMessage.trim()}\n\`\`\``);
-          }
-          const validModBullets = state.modBullets.map((b) => b.trim()).filter(Boolean);
-          modLines.push('- **修正・追加したい内容**:');
-          if (validModBullets.length > 0) {
-            validModBullets.forEach((b, i) => modLines.push(`  ${i + 1}. ${b}`));
+          fixLines.push('- **修正・追加したい点**:');
+          const bullets = state.fixBullets.map(function (b) { return b.trim(); }).filter(Boolean);
+          if (bullets.length > 0) {
+            bullets.forEach(function (b, i) {
+              fixLines.push('  ' + (i + 1) + '. ' + b);
+            });
           } else {
-            modLines.push('  - （未入力）');
+            fixLines.push('  - （未入力）');
           }
-          parts.push(modLines.join('\n'));
+          parts.push(fixLines.join('\n'));
         }
-        secNum++;
+        secNo++;
 
-        // 出力ルール・制約条件
-        const ruleLines = [`## ${secNum}. 出力形式・制約条件`];
-        constraints.forEach((c) => ruleLines.push(`- ${c}`));
-        if (state.llm === 'chatgpt') {
-          ruleLines.push('- ファイルが複数になる場合は、各コードブロックの直前にファイル名を明記してください。');
-        } else if (state.llm === 'gemini') {
-          ruleLines.push('- 回答は「1. 構成・方針の説明 → 2. コード全文 → 3. 実行手順・つまずきやすいポイント」の順で整理して出力してください。');
-        }
-        parts.push(ruleLines.join('\n'));
-        secNum++;
+        const allRules = constraints.concat(outputFormats);
+        parts.push(
+          ['## ' + secNo + '. 制約条件・出力形式'].concat(
+            allRules.map(function (l) { return '- ' + l; })
+          ).join('\n')
+        );
+        secNo++;
 
-        // 既存コード
         if (existingCode) {
-          parts.push(`## ${secNum}. 既存のコード\n\n${existingCode}`);
+          parts.push('## ' + secNo + '. 既存のコード\n\n' + existingCode);
         }
 
         return parts.join('\n\n');
       }
 
       function updatePreview() {
-        const promptText = generatePrompt();
+        const promptText = state.llm === 'claude' ? buildClaudeXmlPrompt() : buildMarkdownPrompt();
         el.promptPreview.value = promptText;
-        el.charCountBadge.textContent = `${promptText.length.toLocaleString()} 文字`;
+        el.charCountBadge.textContent = promptText.length.toLocaleString() + ' 文字';
 
         const missing = getMissingRequiredFields();
         if (missing.length > 0) {
-          el.missingWarning.classList.remove('hidden');
+          el.statusMissingBanner.classList.remove('hidden');
           el.statusReadyBanner.classList.add('hidden');
           el.missingFieldsText.textContent = missing.join('、');
         } else {
-          el.missingWarning.classList.add('hidden');
+          el.statusMissingBanner.classList.add('hidden');
           el.statusReadyBanner.classList.remove('hidden');
         }
       }
 
       // ============================================================
-      // 6. ファイル読み込み・ダウンロード・JSON入出力
+      // 5. サンプル適用・ファイル読込・JSON入出力
       // ============================================================
+      function applySamplePreset(sampleKey) {
+        const preset = SAMPLE_PRESETS[sampleKey];
+        if (!preset) return;
+
+        const base = createDefaultState();
+        const data = preset.data;
+        state = Object.assign({}, base, data, {
+          newBullets: Array.isArray(data.newBullets) ? data.newBullets.slice() : base.newBullets.slice(),
+          fixBullets: Array.isArray(data.fixBullets) ? data.fixBullets.slice() : base.fixBullets.slice(),
+          uploadedFiles: [],
+        });
+
+        syncAllFormInputsFromState();
+        showToast('「' + preset.title + '」を読み込みました', 'success');
+      }
+
       function handleCodeFiles(fileList) {
         const files = Array.from(fileList || []);
         if (files.length === 0) return;
 
-        let loadedCount = 0;
         const MAX_SIZE = 512 * 1024; // 512KB
+        let processed = 0;
 
-        files.forEach((file) => {
+        files.forEach(function (file) {
           if (file.size > MAX_SIZE) {
-            showToast(`「${file.name}」はサイズが大きすぎるためスキップしました（上限512KB）`, 'error');
+            showToast('「' + file.name + '」はサイズ上限(512KB)を超えたためスキップしました', 'error');
             return;
           }
           const reader = new FileReader();
-          reader.onload = (e) => {
+          reader.onload = function (e) {
             try {
               const content = String(e.target.result || '');
-              const existingIdx = state.uploadedFiles.findIndex((f) => f.name === file.name);
-              if (existingIdx >= 0) {
-                state.uploadedFiles[existingIdx].content = content;
+              const existingIndex = state.uploadedFiles.findIndex(function (f) {
+                return f.name === file.name;
+              });
+              if (existingIndex >= 0) {
+                state.uploadedFiles[existingIndex].content = content;
               } else {
-                state.uploadedFiles.push({ name: file.name, content });
+                state.uploadedFiles.push({ name: file.name, content: content });
               }
-              loadedCount++;
+              processed++;
               renderUploadedFiles();
               updatePreview();
-              if (loadedCount === files.length) {
-                showToast(`${loadedCount}件のコードファイルを読み込みました`, 'success');
+              if (processed === files.length) {
+                showToast(processed + '件のコードファイルを読み込みました', 'success');
               }
             } catch (err) {
               console.error(err);
-              showToast(`「${file.name}」の読み込みに失敗しました`, 'error');
+              showToast('「' + file.name + '」の読み込みに失敗しました', 'error');
             }
           };
-          reader.onerror = () => showToast(`「${file.name}」を読み込めませんでした`, 'error');
+          reader.onerror = function () {
+            showToast('「' + file.name + '」を読み込めませんでした', 'error');
+          };
           reader.readAsText(file, 'UTF-8');
         });
       }
 
-      function downloadPromptAsTxt() {
+      function downloadTxt() {
         try {
           const text = el.promptPreview.value;
           const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
           const url = URL.createObjectURL(blob);
           const a = document.createElement('a');
           a.href = url;
-          a.download = `prompt-${getTimestampString()}.txt`;
+          a.download = 'prompt-' + getTimestampString() + '.txt';
           document.body.appendChild(a);
           a.click();
           document.body.removeChild(a);
           URL.revokeObjectURL(url);
-          showToast('プロンプトを .txt ファイルとしてダウンロードしました', 'success');
+          showToast('プロンプトを .txt で保存しました', 'success');
         } catch (err) {
           console.error(err);
           showToast('ダウンロードに失敗しました', 'error');
         }
       }
 
-      function exportStateAsJson() {
+      function exportJson() {
         try {
           const payload = {
             app: 'programming-prompt-generator',
-            version: 2,
+            version: 3,
             savedAt: new Date().toISOString(),
             data: state,
           };
@@ -1852,44 +1756,44 @@
           const url = URL.createObjectURL(blob);
           const a = document.createElement('a');
           a.href = url;
-          a.download = `prompt-config-${getTimestampString()}.json`;
+          a.download = 'prompt-config-' + getTimestampString() + '.json';
           document.body.appendChild(a);
           a.click();
           document.body.removeChild(a);
           URL.revokeObjectURL(url);
-          showToast('入力内容をJSONファイルとして保存しました', 'success');
+          showToast('入力内容をJSON保存しました', 'success');
         } catch (err) {
           console.error(err);
-          showToast('JSONの保存に失敗しました', 'error');
+          showToast('JSON保存に失敗しました', 'error');
         }
       }
 
-      function importStateFromJson(file) {
+      function importJson(file) {
         if (!file) return;
         const reader = new FileReader();
-        reader.onload = (e) => {
+        reader.onload = function (e) {
           try {
             const parsed = JSON.parse(String(e.target.result || ''));
-            const loadedData = parsed && parsed.data ? parsed.data : parsed;
-            if (!loadedData || typeof loadedData !== 'object') {
-              throw new Error('Invalid JSON');
+            const loaded = parsed && parsed.data ? parsed.data : parsed;
+            if (!loaded || typeof loaded !== 'object') {
+              throw new Error('Invalid JSON structure');
             }
-            const defaults = createDefaultState();
-            state = {
-              ...defaults,
-              ...loadedData,
-              newBullets: Array.isArray(loadedData.newBullets) && loadedData.newBullets.length > 0
-                ? loadedData.newBullets.map((b) => String(b ?? ''))
-                : defaults.newBullets,
-              modBullets: Array.isArray(loadedData.modBullets) && loadedData.modBullets.length > 0
-                ? loadedData.modBullets.map((b) => String(b ?? ''))
-                : defaults.modBullets,
-              uploadedFiles: Array.isArray(loadedData.uploadedFiles)
-                ? loadedData.uploadedFiles.filter((f) => f && typeof f.name === 'string' && typeof f.content === 'string')
+            const base = createDefaultState();
+            state = Object.assign({}, base, loaded, {
+              newBullets: Array.isArray(loaded.newBullets) && loaded.newBullets.length > 0
+                ? loaded.newBullets.map(function (b) { return String(b == null ? '' : b); })
+                : base.newBullets.slice(),
+              fixBullets: Array.isArray(loaded.fixBullets) && loaded.fixBullets.length > 0
+                ? loaded.fixBullets.map(function (b) { return String(b == null ? '' : b); })
+                : base.fixBullets.slice(),
+              uploadedFiles: Array.isArray(loaded.uploadedFiles)
+                ? loaded.uploadedFiles.filter(function (f) {
+                    return f && typeof f.name === 'string' && typeof f.content === 'string';
+                  })
                 : [],
-            };
-            syncFormFromState();
-            showToast('JSONファイルから入力内容を復元しました', 'success');
+            });
+            syncAllFormInputsFromState();
+            showToast('JSONファイルから復元しました', 'success');
           } catch (err) {
             console.error(err);
             showToast('JSONファイルの形式が正しくありません', 'error');
@@ -1897,214 +1801,283 @@
             el.inputLoadJson.value = '';
           }
         };
-        reader.onerror = () => {
-          showToast('ファイルの読み込みに失敗しました', 'error');
+        reader.onerror = function () {
+          showToast('JSONファイルの読み込みに失敗しました', 'error');
           el.inputLoadJson.value = '';
         };
         reader.readAsText(file, 'UTF-8');
       }
 
-      function applySample(sampleKey) {
-        const sample = SAMPLES[sampleKey];
-        if (!sample) return;
-        const defaults = createDefaultState();
-        state = {
-          ...defaults,
-          ...sample.data,
-          newBullets: sample.data.newBullets ? [...sample.data.newBullets] : [...defaults.newBullets],
-          modBullets: sample.data.modBullets ? [...sample.data.modBullets] : [...defaults.modBullets],
-          uploadedFiles: [],
-        };
-        syncFormFromState();
-        showToast(`「${sample.label}」を読み込みました`, 'success');
-      }
+      // ============================================================
+      // 6. DOMContentLoaded 初期化＆イベントバインド
+      // ============================================================
+      document.addEventListener('DOMContentLoaded', function () {
+        el = {
+          btnSaveJson: document.getElementById('btnSaveJson'),
+          inputLoadJson: document.getElementById('inputLoadJson'),
+          btnReset: document.getElementById('btnReset'),
 
-      // ============================================================
-      // 7. イベントリスナー登録
-      // ============================================================
-      function bindEvents() {
-        // サンプルボタン群
-        document.querySelectorAll('.sample-btn').forEach((btn) => {
-          btn.addEventListener('click', () => {
-            applySample(btn.getAttribute('data-sample'));
+          tabModeNew: document.getElementById('tabModeNew'),
+          tabModeFix: document.getElementById('tabModeFix'),
+          fixContextSection: document.getElementById('fixContextSection'),
+          cardFixContinue: document.getElementById('cardFixContinue'),
+          cardFixNew: document.getElementById('cardFixNew'),
+          fixNewChatCodeBox: document.getElementById('fixNewChatCodeBox'),
+
+          dropZone: document.getElementById('dropZone'),
+          codeFileInput: document.getElementById('codeFileInput'),
+          uploadedFilesWrapper: document.getElementById('uploadedFilesWrapper'),
+          uploadedFilesChips: document.getElementById('uploadedFilesChips'),
+          btnClearFiles: document.getElementById('btnClearFiles'),
+          pastedCode: document.getElementById('pastedCode'),
+          chkAttachNotice: document.getElementById('chkAttachNotice'),
+
+          selectLlm: document.getElementById('selectLlm'),
+          llmHint: document.getElementById('llmHint'),
+          selectLanguage: document.getElementById('selectLanguage'),
+          langHint: document.getElementById('langHint'),
+          otherLangBox: document.getElementById('otherLangBox'),
+          inputOtherLang: document.getElementById('inputOtherLang'),
+          selectOs: document.getElementById('selectOs'),
+          badgeWinRec: document.getElementById('badgeWinRec'),
+          selectUiStyle: document.getElementById('selectUiStyle'),
+          portableBanner: document.getElementById('portableBanner'),
+          portableBannerTitle: document.getElementById('portableBannerTitle'),
+          portableBannerDesc: document.getElementById('portableBannerDesc'),
+
+          requiredSectionTitle: document.getElementById('requiredSectionTitle'),
+          requiredSectionSub: document.getElementById('requiredSectionSub'),
+          newRequiredFields: document.getElementById('newRequiredFields'),
+          fixRequiredFields: document.getElementById('fixRequiredFields'),
+          newGoal: document.getElementById('newGoal'),
+          newScene: document.getElementById('newScene'),
+          newIo: document.getElementById('newIo'),
+          fixCurrent: document.getElementById('fixCurrent'),
+          fixExpected: document.getElementById('fixExpected'),
+          fixErrorMsg: document.getElementById('fixErrorMsg'),
+
+          bulletSectionTitle: document.getElementById('bulletSectionTitle'),
+          bulletListContainer: document.getElementById('bulletListContainer'),
+          btnAddBullet: document.getElementById('btnAddBullet'),
+
+          optBat: document.getElementById('optBat'),
+          optBatLabel: document.getElementById('optBatLabel'),
+          optBatDesc: document.getElementById('optBatDesc'),
+          badgeBatRec: document.getElementById('badgeBatRec'),
+          optTree: document.getElementById('optTree'),
+          optRelativePath: document.getElementById('optRelativePath'),
+          optSetupGuide: document.getElementById('optSetupGuide'),
+          optNoOmit: document.getElementById('optNoOmit'),
+          optClarifyFirst: document.getElementById('optClarifyFirst'),
+
+          llmBadge: document.getElementById('llmBadge'),
+          charCountBadge: document.getElementById('charCountBadge'),
+          statusReadyBanner: document.getElementById('statusReadyBanner'),
+          statusMissingBanner: document.getElementById('statusMissingBanner'),
+          missingFieldsText: document.getElementById('missingFieldsText'),
+          promptPreview: document.getElementById('promptPreview'),
+          btnCopyPrompt: document.getElementById('btnCopyPrompt'),
+          iconCopyDefault: document.getElementById('iconCopyDefault'),
+          iconCopyDone: document.getElementById('iconCopyDone'),
+          copyBtnText: document.getElementById('copyBtnText'),
+          btnDownloadTxt: document.getElementById('btnDownloadTxt'),
+
+          resetModal: document.getElementById('resetModal'),
+          btnCancelReset: document.getElementById('btnCancelReset'),
+          btnConfirmReset: document.getElementById('btnConfirmReset'),
+          toastContainer: document.getElementById('toastContainer'),
+        };
+
+        // サンプルボタン
+        document.querySelectorAll('.sample-btn').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            const key = btn.getAttribute('data-sample');
+            applySamplePreset(key);
           });
         });
 
         // モード切替タブ
-        el.tabModeNew.addEventListener('click', () => {
+        el.tabModeNew.addEventListener('click', function () {
           state.mode = 'new';
-          updateModeUI();
+          updateModeAndContextUI();
+          renderBullets();
           updatePreview();
         });
-        el.tabModeModify.addEventListener('click', () => {
-          state.mode = 'modify';
-          updateModeUI();
-          updatePreview();
-        });
-
-        // 共通設定
-        el.selectLlm.addEventListener('change', (e) => {
-          state.llm = e.target.value;
-          updateLlmHint();
-          updatePreview();
-        });
-        el.selectLanguage.addEventListener('change', (e) => {
-          state.language = e.target.value;
-          // python_embed ポータブル構成選択時はおすすめ設定を一括自動連携
-          if (isPortableEmbedLang(state.language)) {
-            state.os = 'Windows';
-            state.uiType = 'ブラウザUI（ローカルサーバー＋HTML/Canvas）';
-            state.optScript = true;
-            state.optPortable = true;
-            state.optTree = true;
-            state.optSetupGuide = true;
-
-            el.selectOs.value = state.os;
-            el.selectUiType.value = state.uiType;
-            el.optScript.checked = true;
-            el.optPortable.checked = true;
-            el.optTree.checked = true;
-            el.optSetupGuide.checked = true;
-            showToast('USBポータブル構成に合わせてOS・UI・.bat生成などの設定を自動最適化しました', 'success');
-          } else if (state.language === 'Python') {
-            // Python選択時は起動用スクリプトオプションを自動ON提案
-            state.optScript = true;
-            el.optScript.checked = true;
-          }
-          updateLanguageAndOsUI();
-          updatePreview();
-        });
-        el.inputOtherLang.addEventListener('input', (e) => {
-          state.otherLang = e.target.value;
-          updatePreview();
-        });
-        el.selectOs.addEventListener('change', (e) => {
-          state.os = e.target.value;
-          updateLanguageAndOsUI();
-          updatePreview();
-        });
-        el.selectUiType.addEventListener('change', (e) => {
-          state.uiType = e.target.value;
+        el.tabModeFix.addEventListener('click', function () {
+          state.mode = 'fix';
+          updateModeAndContextUI();
+          renderBullets();
           updatePreview();
         });
 
-        // 新規作成モード入力
-        el.newPurpose.addEventListener('input', (e) => {
-          state.newPurpose = e.target.value;
-          updatePreview();
-        });
-        el.newScene.addEventListener('input', (e) => {
-          state.newScene = e.target.value;
-          updatePreview();
-        });
-        el.newIo.addEventListener('input', (e) => {
-          state.newIo = e.target.value;
-          updatePreview();
-        });
-        el.btnAddNewBullet.addEventListener('click', () => {
-          state.newBullets.push('');
-          renderBulletList(el.newBulletList, 'newBullets', NEW_BULLET_PLACEHOLDERS, state.newBullets.length - 1);
-          updatePreview();
-        });
-        el.newNotes.addEventListener('input', (e) => {
-          state.newNotes = e.target.value;
-          updatePreview();
-        });
-
-        // 修正モード入力
-        document.querySelectorAll('input[name="chatState"]').forEach((radio) => {
-          radio.addEventListener('change', (e) => {
-            state.chatState = e.target.value;
-            updateChatStateUI();
+        // 修正サブオプション（同じチャット / 新しいチャット）
+        document.querySelectorAll('input[name="fixContext"]').forEach(function (radio) {
+          radio.addEventListener('change', function (e) {
+            state.fixContext = e.target.value;
+            updateModeAndContextUI();
             updatePreview();
           });
         });
-        el.chkAttachDirect.addEventListener('change', (e) => {
-          state.attachDirect = e.target.checked;
-          updateChatStateUI();
-          updatePreview();
+
+        // ドラッグ＆ドロップ / ファイル選択
+        el.dropZone.addEventListener('click', function () {
+          el.codeFileInput.click();
         });
-        el.dropZone.addEventListener('click', () => el.codeFileInput.click());
-        el.codeFileInput.addEventListener('change', (e) => {
+        el.codeFileInput.addEventListener('change', function (e) {
           handleCodeFiles(e.target.files);
           el.codeFileInput.value = '';
         });
-        el.dropZone.addEventListener('dragover', (e) => {
+        el.dropZone.addEventListener('dragover', function (e) {
           e.preventDefault();
           el.dropZone.classList.add('border-indigo-500', 'bg-indigo-50');
         });
-        el.dropZone.addEventListener('dragleave', () => {
+        el.dropZone.addEventListener('dragleave', function () {
           el.dropZone.classList.remove('border-indigo-500', 'bg-indigo-50');
         });
-        el.dropZone.addEventListener('drop', (e) => {
+        el.dropZone.addEventListener('drop', function (e) {
           e.preventDefault();
           el.dropZone.classList.remove('border-indigo-500', 'bg-indigo-50');
           handleCodeFiles(e.dataTransfer.files);
         });
-        el.btnClearFiles.addEventListener('click', () => {
+        el.btnClearFiles.addEventListener('click', function () {
           state.uploadedFiles = [];
           renderUploadedFiles();
           updatePreview();
         });
-        el.pastedCode.addEventListener('input', (e) => {
+        el.pastedCode.addEventListener('input', function (e) {
           state.pastedCode = e.target.value;
           updatePreview();
         });
-        el.modCurrentState.addEventListener('input', (e) => {
-          state.modCurrentState = e.target.value;
-          updatePreview();
-        });
-        el.modExpectedState.addEventListener('input', (e) => {
-          state.modExpectedState = e.target.value;
-          updatePreview();
-        });
-        el.modErrorMessage.addEventListener('input', (e) => {
-          state.modErrorMessage = e.target.value;
-          updatePreview();
-        });
-        el.btnAddModBullet.addEventListener('click', () => {
-          state.modBullets.push('');
-          renderBulletList(el.modBulletList, 'modBullets', MOD_BULLET_PLACEHOLDERS, state.modBullets.length - 1);
+        el.chkAttachNotice.addEventListener('change', function (e) {
+          state.attachNotice = e.target.checked;
           updatePreview();
         });
 
-        // オプション群
-        el.optNoOmit.addEventListener('change', (e) => {
-          state.optNoOmit = e.target.checked;
+        // 基本設定
+        el.selectLlm.addEventListener('change', function (e) {
+          state.llm = e.target.value;
+          updateSettingsHintsUI();
           updatePreview();
         });
-        el.optClarifyFirst.addEventListener('change', (e) => {
-          state.optClarifyFirst = e.target.checked;
+
+        el.selectLanguage.addEventListener('change', function (e) {
+          state.language = e.target.value;
+          if (isPortableEmbed(state.language)) {
+            state.os = 'windows';
+            state.uiStyle = 'gui';
+            state.optBat = true;
+            state.optRelativePath = true;
+            state.optTree = true;
+            state.optSetupGuide = true;
+
+            el.selectOs.value = state.os;
+            el.selectUiStyle.value = state.uiStyle;
+            el.optBat.checked = true;
+            el.optRelativePath.checked = true;
+            el.optTree.checked = true;
+            el.optSetupGuide.checked = true;
+            showToast('USBポータブル構成に合わせてOS・UI・bat生成・手順設定を自動最適化しました', 'success');
+          } else if (state.language === 'python') {
+            state.optBat = true;
+            el.optBat.checked = true;
+          }
+          updateSettingsHintsUI();
           updatePreview();
         });
-        el.optScript.addEventListener('change', (e) => {
-          state.optScript = e.target.checked;
+
+        el.inputOtherLang.addEventListener('input', function (e) {
+          state.otherLang = e.target.value;
           updatePreview();
         });
-        el.optTree.addEventListener('change', (e) => {
+
+        el.selectOs.addEventListener('change', function (e) {
+          state.os = e.target.value;
+          updateSettingsHintsUI();
+          updatePreview();
+        });
+
+        el.selectUiStyle.addEventListener('change', function (e) {
+          state.uiStyle = e.target.value;
+          updatePreview();
+        });
+
+        // 必須質問入力
+        el.newGoal.addEventListener('input', function (e) {
+          state.newGoal = e.target.value;
+          updatePreview();
+        });
+        el.newScene.addEventListener('input', function (e) {
+          state.newScene = e.target.value;
+          updatePreview();
+        });
+        el.newIo.addEventListener('input', function (e) {
+          state.newIo = e.target.value;
+          updatePreview();
+        });
+        el.fixCurrent.addEventListener('input', function (e) {
+          state.fixCurrent = e.target.value;
+          updatePreview();
+        });
+        el.fixExpected.addEventListener('input', function (e) {
+          state.fixExpected = e.target.value;
+          updatePreview();
+        });
+        el.fixErrorMsg.addEventListener('input', function (e) {
+          state.fixErrorMsg = e.target.value;
+          updatePreview();
+        });
+
+        // 箇条書き追加ボタン
+        el.btnAddBullet.addEventListener('click', function () {
+          const listKey = state.mode === 'new' ? 'newBullets' : 'fixBullets';
+          state[listKey].push('');
+          renderBullets(state[listKey].length - 1);
+          updatePreview();
+        });
+
+        // オプションチェックボックス群
+        el.optBat.addEventListener('change', function (e) {
+          state.optBat = e.target.checked;
+          updatePreview();
+        });
+        el.optTree.addEventListener('change', function (e) {
           state.optTree = e.target.checked;
           updatePreview();
         });
-        el.optPortable.addEventListener('change', (e) => {
-          state.optPortable = e.target.checked;
+        el.optRelativePath.addEventListener('change', function (e) {
+          state.optRelativePath = e.target.checked;
           updatePreview();
         });
-        el.optSetupGuide.addEventListener('change', (e) => {
+        el.optSetupGuide.addEventListener('change', function (e) {
           state.optSetupGuide = e.target.checked;
           updatePreview();
         });
-        document.querySelectorAll('input[name="recommendMode"]').forEach((radio) => {
-          radio.addEventListener('change', (e) => {
+        el.optNoOmit.addEventListener('change', function (e) {
+          state.optNoOmit = e.target.checked;
+          updatePreview();
+        });
+        el.optClarifyFirst.addEventListener('change', function (e) {
+          state.optClarifyFirst = e.target.checked;
+          updatePreview();
+        });
+
+        // おすすめ機能ラジオボタン
+        document.querySelectorAll('input[name="recommendMode"]').forEach(function (radio) {
+          radio.addEventListener('change', function (e) {
             state.recommendMode = e.target.value;
             updatePreview();
           });
         });
 
+        // プレビュー手動編集時の文字数リアルタイム更新
+        el.promptPreview.addEventListener('input', function () {
+          el.charCountBadge.textContent = el.promptPreview.value.length.toLocaleString() + ' 文字';
+        });
+
         // コピーボタン
         let copyTimer = null;
-        el.btnCopyPrompt.addEventListener('click', () => {
-          const missing = getMissingRequiredFields();
-          const ok = copyTextToClipboard(el.promptPreview.value);
+        el.btnCopyPrompt.addEventListener('click', function () {
+          const ok = copyToClipboard(el.promptPreview.value);
           if (ok) {
             el.btnCopyPrompt.classList.remove('bg-indigo-600', 'hover:bg-indigo-700');
             el.btnCopyPrompt.classList.add('bg-emerald-600', 'hover:bg-emerald-700');
@@ -2112,14 +2085,15 @@
             el.iconCopyDone.classList.remove('hidden');
             el.copyBtnText.textContent = 'コピーしました！';
 
+            const missing = getMissingRequiredFields();
             if (missing.length > 0) {
-              showToast(`コピーしました（※未入力の必須項目があります：${missing.join('、')}）`, 'warning');
+              showToast('コピーしました（※未入力の必須項目：' + missing.join('、') + '）', 'warning');
             } else {
               showToast('プロンプトをクリップボードにコピーしました！', 'success');
             }
 
             clearTimeout(copyTimer);
-            copyTimer = setTimeout(() => {
+            copyTimer = setTimeout(function () {
               el.btnCopyPrompt.classList.remove('bg-emerald-600', 'hover:bg-emerald-700');
               el.btnCopyPrompt.classList.add('bg-indigo-600', 'hover:bg-indigo-700');
               el.iconCopyDefault.classList.remove('hidden');
@@ -2131,45 +2105,39 @@
           }
         });
 
-        // .txt ダウンロード
-        el.btnDownloadTxt.addEventListener('click', downloadPromptAsTxt);
+        // .txt 保存
+        el.btnDownloadTxt.addEventListener('click', downloadTxt);
 
         // JSON保存・読込
-        el.btnSaveJson.addEventListener('click', exportStateAsJson);
-        el.inputLoadJson.addEventListener('change', (e) => {
+        el.btnSaveJson.addEventListener('click', exportJson);
+        el.inputLoadJson.addEventListener('change', function (e) {
           if (e.target.files && e.target.files[0]) {
-            importStateFromJson(e.target.files[0]);
+            importJson(e.target.files[0]);
           }
         });
 
-        // 全リセットモーダル
-        el.btnReset.addEventListener('click', () => {
+        // リセット確認モーダル
+        function closeResetModal() {
+          el.resetModal.classList.add('hidden');
+          el.resetModal.classList.remove('flex');
+        }
+        el.btnReset.addEventListener('click', function () {
           el.resetModal.classList.remove('hidden');
           el.resetModal.classList.add('flex');
         });
         el.btnCancelReset.addEventListener('click', closeResetModal);
-        el.resetModal.addEventListener('click', (e) => {
+        el.resetModal.addEventListener('click', function (e) {
           if (e.target === el.resetModal) closeResetModal();
         });
-        el.btnConfirmReset.addEventListener('click', () => {
+        el.btnConfirmReset.addEventListener('click', function () {
           state = createDefaultState();
-          syncFormFromState();
+          syncAllFormInputsFromState();
           closeResetModal();
           showToast('入力内容をすべてリセットしました', 'info');
         });
-      }
 
-      function closeResetModal() {
-        el.resetModal.classList.add('hidden');
-        el.resetModal.classList.remove('flex');
-      }
-
-      // ============================================================
-      // 8. 初期化
-      // ============================================================
-      document.addEventListener('DOMContentLoaded', () => {
-        bindEvents();
-        syncFormFromState();
+        // 初回描画（ページ読み込み直後にプレビューを生成）
+        syncAllFormInputsFromState();
       });
     })();
   </script>
